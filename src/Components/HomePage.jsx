@@ -1,9 +1,9 @@
-function App() {
-  return (
-    <div>
-    </div>
-  );
+function HomePage() {
+    return (
+      <div>
+      </div>
+    );
+  }
   
-}
-
-export default App;
+  export default HomePage;
+  
