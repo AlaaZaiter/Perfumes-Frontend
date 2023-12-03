@@ -1,0 +1,88 @@
+
+.tableContainer{
+    width: 100%; 
+    height: fit-content;
+    background: white; 
+    border-radius: 80px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    height: 80%;
+   
+
+}
+.bgcardPerfumes{
+    padding:0.7rem;
+    margin-top: 4rem;
+    background-color: #5B6A97;
+    background-size: cover; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 80px 80px;
+    width: 95%;
+    height:80%;
+}
+.tbcourse{
+    width: 100%;
+}
+.tbcourse >tr>td {
+    border: 1px solid black !important;
+   
+}
+.tbcourse >tr >th {
+    border: 1px solid black !important;
+}
+.AddPerfmueButton{
+    width: 20%;
+    text-align: center;
+    height: 40px;
+    border-radius: 26px;
+    border: none;
+    background-color: #5B6A97;
+    margin: 10px auto; 
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+.AddPerfumeForm{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    
+}
+.AddPerfumeForm input{
+    border-radius: 10px;
+    height: 30px;
+    border: none;
+}
+.AddPerfumeForm textarea{
+    border-radius: 10px;
+    height: 60px;
+    border: none;
+}
+.AddPerfumeForm input{
+    width: 150px;
+
+}
+.AddPerfumeForm input:nth-child(10) {
+    width: 180px;
+}
+.AddPerfumeForm p{
+    text-align: start;
+    color: white;
+}
+.AddPerfumeForm button{
+    border-radius: 10px;
+    width: 40%;
+    margin-top: 10px;
+    height: 30px;
+    border: none;
+    background-color: #DCF6F7;
+}
+
+

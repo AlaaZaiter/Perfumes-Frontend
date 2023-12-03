@@ -1,0 +1,109 @@
+*{
+    width: 100%;
+    overflow-x: hidden;
+}
+.PagesLink{
+    text-decoration: none;
+    color: white;
+}
+.SideBarSubContainer {
+    width: 30%;
+    height: 170vh;
+    background-color: #5B6A97;   
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+ 
+}
+
+
+.TrainerDashMainContainer{
+    margin: 0 auto;
+    width: fit-content;
+}
+
+
+.TinyTechiesImg {
+    margin: 0 auto;
+    width: 100%;
+    
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+    
+
+.NavBar {
+width: 100%;
+    position: absolute;
+    left: 22.9%;
+    bottom: 74.1%;
+}
+.SideBarButtonLogout{
+    margin-top: 4rem !important;
+}
+.SideBarButton {
+    width: 80%;
+    text-align: center;
+    height: 40px;
+    border-radius: 26px;
+    border: none;
+    background-color: #DCF6F7;
+    font-size: 1.7rem;
+    margin: 10px auto; 
+    display: flex; 
+    align-items: center;
+    justify-content: center; 
+  }
+  
+  .SideBarButton img {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+
+    width: auto;
+    height: 2rem;}
+.SideBarTitle{
+    margin-bottom: 3rem;
+    text-align: center;
+}
+.DashTrainerStat{
+    text-align: center;
+}
+.SideBarSubContainer-p {
+    color: white;
+    font-size: x-large;
+    align-self: center;
+    margin:0px;
+}
+
+
+
+.main-content {
+    padding: 7px;
+    position: absolute;
+    top: 15rem;
+    left: 17rem;
+    width: 80vw;
+}
+
+.SideBarSubContainer button:nth-child(5) {
+    margin-top: 100px;
+}
+
+.SideBarSubContainer button:nth-child(6) {
+    margin-top: 20px;
+}
+
+.SideBarSubContainer button:nth-child(7) {
+    margin-top: 20px;
+}
+.SeparteSubContainerAndContent{
+    display: flex;
+    flex-direction: row;
+   ;
+}
+.selectedPage{
+    margin-top: 100px;
+    margin-left:5px ;
+}
