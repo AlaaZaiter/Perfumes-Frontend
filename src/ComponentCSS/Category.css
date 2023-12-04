@@ -5,21 +5,21 @@
     display: flex;
 }
 .elementAs {
-    background-image: url(Rectangle\ 9.png);
+    background-image: url('/public/images/Rectangle\ 9.png ');
     width: 368px;
     height: 465px;
     margin-right: 20px;
     font-style: italic;
 }
 .elementBs {
-    background-image: url(Rectangle\ 10.png);
+    background-image: url('/public/images/Rectangle\ 10.png');
     width: 368px;
     height: 465px;
     margin-right: 20px;
     font-style: italic;
 }
 .elementCs {
-    background-image: url(/images/Rectangle\ 11.png);
+    background-image: url('/public/images/Rectangle\ 11.png');
     width: 368px;
     height: 465px;
     margin-right: 20px;
