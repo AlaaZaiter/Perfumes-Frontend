@@ -2,25 +2,25 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import   '../AdminDashCSS/Viewperfumes.css'
+import AddSeller from "./AddSeller";
 
 const ViewSellers = () => {
-  const [activePage, setActivePage] = useState("TrainerDashWelcome");
+  const [activePage,setActivePage] =useState("ViewSellers");
 
-  const handleMenuClick = (page) => {
-    setActivePage(page);
-  };
+ 
+  const switchToAddSeller=()=>{
+      setActivePage("AddSeller");
 
-  const handleLogout = () => {
-    localStorage.removeItem('userRole');
-    localStorage.removeItem('userId');
-  };
+  }
 
 
 
   return (
     <div>
-        <button className="AddPerfmueButton">Add Seller</button>
-        <div className="bgcardPerfumes">
+        <button className="AddPerfmueButton" onClick={switchToAddSeller}>Add Seller</button>
+        {activePage === "AddSeller" && <AddSeller />}
+
+        {activePage === "ViewSellers" && <div className="bgcardPerfumes">
         <div className="tableContainer">
             <table border="1" className="tbcourse">
             <tr>
@@ -34,7 +34,7 @@ const ViewSellers = () => {
             </table>
         </div>
         
-        </div>
+        </div>}
     </div>
   );
 };

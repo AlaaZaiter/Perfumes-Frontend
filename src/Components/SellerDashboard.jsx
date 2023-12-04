@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import  '../AdminDashCSS/AdminDashboard.css'
 import ViewPerfumes from '../AdminDashPages/ViewPerfumes.jsx';
-import ViewSellers from '../AdminDashPages/Viewsellers.jsx';
 
 function TrainerDashboard() {
   const [trainerData, setTrainerData] = useState(null);
@@ -45,16 +44,7 @@ function TrainerDashboard() {
          
         </div>
         </a>
-      <a className="PagesLink"
-            href='#ViewSellers'
-            onClick={() => handleMenuClick("ViewSellers")}
-          >
-        <div className='SideBarButton'>
-         
-            Sellers
-          
-        </div>
-        </a>
+      
        
         <a className="PagesLink"
            href='#'
@@ -74,7 +64,6 @@ function TrainerDashboard() {
       </div>
       <div className='selectedPage'>
       {activePage === "ViewPerfumes" && <ViewPerfumes Data={data} />}
-      {activePage === "ViewSellers" && <ViewSellers />}
       
       </div>
       </div>

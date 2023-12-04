@@ -5,6 +5,7 @@ function App() {
       <HomePage/>
     </div>
   );
+  
 }
 
 export default App;
