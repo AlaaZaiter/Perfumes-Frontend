@@ -21,7 +21,7 @@ const Contact = () => {
             <div className="elementA">
               <h1 className="justA">JUST SAY HELLO!</h1>
               <p className="letA">Let us know about you!</p>
-              <form action="#" method="post" className="FormAss">
+              <form action="mailto:solla836@gmail.com" method="post" className="FormAss">
                 <input type="text" id="fullname" name="fullname" defaultValue="Full Name..." required className="textareaA" />
                 <br />
                 <input type="email" id="email" name="email" defaultValue="Email..." required className="textareaA" />
