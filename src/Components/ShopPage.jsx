@@ -5,7 +5,7 @@ import Category from './Category'
 const ShopPage = () => {
   return (
     <div>
-        <Products/>
+        {/* <Products/> */}
         <Category/>
     </div>
   )
