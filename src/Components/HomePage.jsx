@@ -1,6 +1,8 @@
+import FooterAndOurClients from "./FooterAndOurClients";
 function HomePage() {
     return (
       <div>
+        <FooterAndOurClients/>
       </div>
     );
   }
