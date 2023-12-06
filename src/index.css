@@ -59,7 +59,9 @@ nav ul li a {
   font-size: 24px;
   fill: black;
 }
-
+.Headercontainer{
+  width: 100%;
+}
 .content {
   font-family: Inter;
   font-size: 50px;

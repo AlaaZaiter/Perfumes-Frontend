@@ -8,7 +8,7 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
   return (
-    <div className="container">
+    <div className="Headercontainer">
       <nav>
         <ul className="left-nav">
           <li><a href="#">Home</a></li>
