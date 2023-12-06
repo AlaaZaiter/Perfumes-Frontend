@@ -1,0 +1,82 @@
+.bodyA {
+    background-color:white;
+    height:auto;
+    width: auto;
+}
+.luxA{
+    font-style: super bold;
+    background-color: #CEB5B3;
+    border-radius: 0px 0px 100px 100px;
+}
+.imgA9{
+    width: 468px;
+    height: 600px;
+    border-radius: 30px;
+    margin-left: 50px;
+}
+.justA{
+    font-size: 48px;
+}
+
+.containerAA {
+    justify-content: center;
+    background-color: #C9C8C9;
+    height: 750px;
+    width: 1100px;
+    color: black;
+    margin-left: 120px;
+}
+.containerAB{
+    display: flex;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 48px 51px;
+    text-decoration: none;
+}
+
+li a:hover {
+    color: rgba(0, 0, 0, 0.507);
+}
+
+.textareaA {
+    background-color: #5b6a9791;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 30px;
+    width:532px;
+    height: 483px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+}
+
+
+.loginA{
+    background-color: #5b6a97;
+    color: white;
+    border-radius: 30px;
+    width: 155px;
+    height: 51px;
+    margin-top: 40px;
+    border-color: #5b6a97;
+}
+.loginA:hover{
+    background-color: #3e4e73a6;
+}
