@@ -56,7 +56,6 @@ li a:hover {
     background-color: #5b6a9791;
     color: white;
     border: none;
-    cursor: pointer;
     border-radius: 30px;
     width:532px;
     height: 483px;
@@ -71,6 +70,7 @@ li a:hover {
 .loginA{
     background-color: #5b6a97;
     color: white;
+    cursor: pointer;
     border-radius: 30px;
     width: 155px;
     height: 51px;
@@ -79,4 +79,39 @@ li a:hover {
 }
 .loginA:hover{
     background-color: #3e4e73a6;
+}
+@media (min-width: 320px) and (max-width:430px){
+    .imgA9{
+        display: none;
+    }
+   li {
+        flex-direction: column;
+        display: none;
+        cursor: pointer;
+      }
+    
+      .burger-menu {
+        display: block;
+      }
+      .textareaA{
+        width:300px;
+        height: 400px;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 19px;
+        
+      }
+      .justA{
+        font-size: 40px;
+    }
+    
+    .containerAA{
+        height: 520px;
+        width: 600px;
+        margin-left: 5px;
+    }
+    
+
 }
