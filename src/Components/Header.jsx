@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import '../index.css';
+import  { createContext, useContext } from 'react';
+
+import { Link } from 'react-router-dom';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,7 +26,7 @@ const Header = () => {
         </div>
         <ul className="right-nav">
           <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><Link to="/contact">Contact</Link></li>
           <li><button className="login-button">Login</button></li>
         </ul>
         <div className="burger-menu" onClick=
