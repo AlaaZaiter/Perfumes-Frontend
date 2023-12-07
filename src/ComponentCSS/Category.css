@@ -47,7 +47,17 @@
 .view-products:hover {
     background-color: #e0e0e0;
 }
-
+.CategoryTitle{
+    text-align: center;
+}
+.content {
+    font-family: Inter;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+    margin-top: 5px;
+}
 .containerAa {
     margin: 0 auto;
     padding: 20px;
@@ -89,6 +99,10 @@
  }
 .elementAa , .elementBa , .elementCa , .elementDa{
     margin-right: 40px;
+}
+.wea {
+    font-size: 30px;
+    font-family: Inter;
 }
 .wea , .view-productsa , .oua{
     margin-top: 72px;

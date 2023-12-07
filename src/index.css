@@ -2,11 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 body {
-  background-image: url(Components/PerfumeH.JPG);
   height: 100%;
   width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  padding: 0px;
 }
 
 nav {
@@ -64,6 +62,10 @@ nav ul li a {
 }
 .Headercontainer{
   width: 100%;
+  background-image: url(Components/PerfumeH.JPG);
+  background-repeat: no-repeat;
+  background-size: cover;
+
 }
 .content {
   font-family: Inter;
@@ -71,6 +73,7 @@ nav ul li a {
   font-style: normal;
   font-weight: 800;
   line-height: normal;
+  margin-top: 5px;
 }
 
 .login-button {

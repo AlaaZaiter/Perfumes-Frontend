@@ -1,15 +1,17 @@
+
 import Header from "./Header";
 import Category from "./Category";
 import BestSaller from "./BestSaller.jsx";
-import Aboutus from "./AboutUs.jsx";
+import FooterAndOurClients from "./FooterAndOurClients";
+import "../ComponentCSS/HomePageContainer.css"
+
 function HomePage() {
     return (
-      <div>
+      <div className="HomePageContainer">
         <Header/>
         <Category/>
-
         <BestSaller/>
-        <Aboutus/>
+        <FooterAndOurClients/>
       </div>
     );
   }

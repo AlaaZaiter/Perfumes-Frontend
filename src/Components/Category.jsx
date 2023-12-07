@@ -3,7 +3,7 @@ import '../ComponentCSS/Category.css';
 const Category = () => {
   return (
     <div>
-      <h2>Category of Fragrance</h2>
+      <h2 className='CategoryTitle content'>Category of Fragrance</h2>
       <div className="containerAs">
         <div className="elementAs">
           <a href="#" className="view-products">

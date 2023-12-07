@@ -20,7 +20,7 @@ const Bestseller = () => {
 };
 
   return (
-    <div className="container bg-slate-500 w-full">
+    <div className="container mx-auto bg-slate-500 w-full">
       <div className="w-full max-w-sm   border ">
         <img
           className="p-8 rounded-t-lg"
