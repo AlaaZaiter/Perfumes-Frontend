@@ -1,0 +1,114 @@
+.header {
+    background-image: url(/Perfumes-Frontend//public/images/PerfumeH.JPG);
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  nav ul {
+    list-style: none;
+    width: 100%;
+  }
+  
+  .left-nav {
+    display: flex;
+    gap: 70px;
+    justify-content: center;
+  }
+  
+  .right-nav {
+    display: flex;
+    gap: 70px;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  nav ul li a {
+    color: black;
+    text-decoration: none;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  
+  .buy-button {
+    background-color: #5b6a97;
+    border-radius: 30px;
+    border: none;
+    width: 100px;
+    height: 51px;
+    color: white;
+  }
+  
+  .svg {
+    position: relative;
+  }
+  
+  .svg-text {
+    font-family: Arial, sans-serif;
+    font-size: 24px;
+    fill: black;
+  }
+  
+  .content {
+    font-family: Inter;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: normal;
+  }
+  
+  .login-button {
+    font-size: 20px;
+    color: white;
+    border-radius: 30px;
+    background: #5b6a97;
+    border: none;
+    width: 100px;
+    height: 50x;
+  }
+  
+  .burger-menu {
+    display: none; 
+  }
+  
+  .line {
+    width: 50px;
+    height: 2px;
+    background-color: #000;
+    margin: 5px;
+  }
+  
+  @media (max-width: 600px) {
+    .left-nav,
+    .right-nav {
+      flex-direction: column;
+      display: none;
+      cursor: pointer;
+    }
+  
+    .burger-menu {
+      display: block;
+    }
+  
+    body {
+      background-size: cover;
+      background-position: center;
+      height: 100%;
+      width: 100%;
+    }
+    .content{
+      font-size: 30px;
+    }
+  }
+  

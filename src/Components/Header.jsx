@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import '../index.css';
+import '../ComponentCSS/header.css';
+import { useNavigate } from "react-router-dom";
+
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const navigate = useNavigate();
 
   const handleMenuClick = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+  const handlelogin =() => {
+    navigate('/login');
   };
   return (
     <div className="container">
@@ -24,7 +30,7 @@ const Header = () => {
         <ul className="right-nav">
           <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
-          <li><button className="login-button">Login</button></li>
+          <li><button className="login-button" onClick={handlelogin}>Login</button></li>
         </ul>
         <div className="burger-menu" onClick=
         {handleMenuClick}>
