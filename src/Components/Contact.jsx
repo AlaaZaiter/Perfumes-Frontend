@@ -6,17 +6,7 @@ const Contact = () => {
     return (
       <div className="bodyA">
         <div className="containerAA">
-          <div className="barA">
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Shop</a></li>
-              <li><a href="#">Category</a></li>
-              <li><a className="luxA">Luxfume</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><input type="submit" value="Login" className="loginA" href="#" /></li>
-            </ul>
-          </div>
+          
           <div className="containerAB">
             <div className="elementA">
               <h1 className="justA">JUST SAY HELLO!</h1>
