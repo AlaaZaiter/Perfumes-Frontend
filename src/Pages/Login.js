@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import loginImage from './login image.jpg';
+import{useForm} from "react-hook-form"
+
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -40,11 +43,11 @@ function Login() {
   };
 
   return (
-    <div className="card">
-      <h2> Login </h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <h2> Login   </h2>
       {error && <p className="error-message">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <div className="form-input">
+        <div className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500">
           <label>Email:</label>
           <input
             type="email"
@@ -58,11 +61,15 @@ function Login() {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className=""
           />
         </div>
-        <button type="submit" className="submit-button">
-          Login
-        </button>
+        
+        <button type="submit" className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]">
+                 
+        </button> 
+       <div className="loginImage" 
+       scr= {loginImage}></div>
       </form>
     </div>
   );
