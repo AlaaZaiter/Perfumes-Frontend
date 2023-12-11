@@ -6,7 +6,6 @@ import FooterAndOurClients from "./FooterAndOurClients";
 import "../ComponentCSS/HomePageContainer.css";
 import React, { createContext, useContext } from 'react';
 import { BrowserRouter as Router, Route ,Routes} from 'react-router-dom';
-import Contact from "./Contact.jsx";
 
 
 function HomePage() {
