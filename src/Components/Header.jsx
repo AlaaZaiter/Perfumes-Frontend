@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../index.css';
 import  { createContext, useContext } from 'react';
+import Headercontainer from './HeaderContainer';
 
 import { Link } from 'react-router-dom';
 
@@ -13,7 +14,8 @@ const Header = () => {
   };
   return (
     <div className="Headercontainer">
-      <div>
+      <Headercontainer/>
+            <div>
         <h1 className="content">Discover the</h1>
         <h1 className="content">Fragrance of</h1>
         <h1 className="content">Elegance</h1>

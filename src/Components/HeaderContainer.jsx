@@ -1,7 +1,10 @@
 
       import React, { useState } from 'react';
       import '../index.css';
-      import { BrowserRouter as Router, Link, Route } from 'react-router-dom';
+      import { BrowserRouter, Routes,Link, Route } from "react-router-dom";
+      import { useNavigate } from "react-router-dom";
+
+
       import HomePage from './HomePage';
       import Contact from './Contact';
 
@@ -9,6 +12,7 @@
       
       const Headercontainer = () => {
           const [isMenuOpen, setIsMenuOpen] = useState(false);
+          const navigate = useNavigate();
       
         const handleMenuClick = () => {
           setIsMenuOpen(!isMenuOpen);
@@ -39,10 +43,7 @@
           <div className={`line ${isMenuOpen ? 'active' : 'Contact'}`}>login</div>
         </div>
       </nav>
-<Router>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/contact" element={<Contact />} />
-</Router>
+
           </div>
         );
       };

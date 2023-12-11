@@ -10,7 +10,7 @@ const Bestseller = () => {
   }, []);
 
   const getBestSaller = () => {
-    axios.get(`${process.env.REACT_APP_URL}/perfume/getAllPerfumes`).then((response) => {
+    axios.get(`${process.env.REACT_APP_URL}/perfumes/getAllPerfumes`).then((response) => {
       setPerfumes(response.data.data);
       console.log(response);
     })
