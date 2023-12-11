@@ -31,28 +31,8 @@
 .containerAB{
     display: flex;
 }
-ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-}
 
-li {
-    float: left;
-}
 
-li a {
-    display: block;
-    color: black;
-    text-align: center;
-    padding: 50px 52px;
-    text-decoration: none;
-}
-
-li a:hover {
-    color: rgba(0, 0, 0, 0.507);
-}
 
 .textareaA {
     background-color: #5b6a9791;
