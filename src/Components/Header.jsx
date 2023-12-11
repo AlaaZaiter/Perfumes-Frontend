@@ -26,7 +26,7 @@ const Header = () => {
         </div>
         <ul className="right-nav">
           <li><a href="#">About</a></li>
-          <li><Link to="/contact">Contact</Link></li>
+          <li><a href="#">Contact</a></li>
           <li><button className="login-button">Login</button></li>
         </ul>
         <div className="burger-menu" onClick=

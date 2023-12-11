@@ -16,11 +16,7 @@ function HomePage() {
         <Category/>
         <BestSaller/>
         <FooterAndOurClients/>
-        <Routes>
-        <div>
-        <Route path="/contact" component={Contact} />
-        </div>
-      </Routes>
+        
       </div>
     );
   }
