@@ -1,10 +1,14 @@
 import React from 'react';
 import '../ComponentCSS/Contact.css';
+import '../index.css';
+import Headercontainer from './HeaderContainer';
+
 
 
 const Contact = () => {
     return (
       <div className="bodyA">
+        <Headercontainer/>
         <div className="containerAA">
           
           <div className="containerAB">

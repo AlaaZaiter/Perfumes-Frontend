@@ -1,10 +1,10 @@
 import React, { createContext, useContext } from 'react';
 import HomePage from "./Components/HomePage";
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Headercontainer from './Components/HeaderContainer';
 function App() {
   return (
     <div>
-      <HomePage/>
+      <Headercontainer/>
     </div>
   );
 }
