@@ -2,7 +2,6 @@
 import Header from "./Header";
 import Category from "./Category";
 import BestSaller from "./BestSaller.jsx";
-import FooterAndOurClients from "./FooterAndOurClients";
 import "../ComponentCSS/HomePageContainer.css";
 import React, { createContext, useContext } from 'react';
 import { BrowserRouter as Router, Route ,Routes} from 'react-router-dom';
@@ -14,11 +13,6 @@ function HomePage() {
         <Header/>
         <Category/>
         <BestSaller/>
-        <FooterAndOurClients/>
-        
-      </div>
-    );
-  }
-  
-  export default HomePage;
-  
+        </div>
+    )}
+    export default HomePage;

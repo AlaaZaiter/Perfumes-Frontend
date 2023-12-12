@@ -1664,7 +1664,11 @@
 
 "@remix-run/router@1.13.1":
   version "1.13.1"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.13.1.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/@remix-run/router/-/router-1.13.1.tgz#07e2a8006f23a3bc898b3f317e0a58cc8076b86e"
+>>>>>>> origin/5-AdminDashHomePage
   integrity sha512-so+DHzZKsoOcoXrILB4rqDkMDy7NLMErRdOxvzvOKb507YINKUP4Di+shbTZDhSE/pBZ+vr7XGIpcOO0VLSA+Q==
 
 "@rollup/plugin-babel@^5.2.0":
@@ -2851,7 +2855,11 @@ axe-core@=4.7.0:
 
 axios@^1.6.2:
   version "1.6.2"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/axios/-/axios-1.6.2.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.2.tgz#de67d42c755b571d3e698df1b6504cde9b0ee9f2"
+>>>>>>> origin/5-AdminDashHomePage
   integrity sha512-7i24Ri4pmDRfJTR7LDBhsOTtcm+9kjX5WiY1X3wIisx6G9So3pfMkEiU7emUBe46oceVImccTEM3k6C5dbVW8A==
   dependencies:
     follow-redirects "^1.15.0"
@@ -4841,7 +4849,11 @@ form-data@^3.0.0:
 
 form-data@^4.0.0:
   version "4.0.0"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/form-data/-/form-data-4.0.0.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
+>>>>>>> origin/5-AdminDashHomePage
   integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
   dependencies:
     asynckit "^0.4.0"
@@ -7819,7 +7831,11 @@ proxy-addr@~2.0.7:
 
 proxy-from-env@^1.1.0:
   version "1.1.0"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/proxy-from-env/-/proxy-from-env-1.1.0.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/proxy-from-env/-/proxy-from-env-1.1.0.tgz#e102f16ca355424865755d2c9e8ea4f24d58c3e2"
+>>>>>>> origin/5-AdminDashHomePage
   integrity sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==
 
 psl@^1.1.33:
@@ -7960,7 +7976,11 @@ react-refresh@^0.11.0, "react-refresh@>=0.10.0 <1.0.0":
 
 react-router-dom@^6.20.1:
   version "6.20.1"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/react-router-dom/-/react-router-dom-6.20.1.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.20.1.tgz#e34f8075b9304221420de3609e072bb349824984"
+>>>>>>> origin/5-AdminDashHomePage
   integrity sha512-npzfPWcxfQN35psS7rJgi/EW0Gx6EsNjfdJSAk73U/HqMEJZ2k/8puxfwHFgDQhBGmS3+sjnGbMdMSV45axPQw==
   dependencies:
     "@remix-run/router" "1.13.1"
@@ -7968,7 +7988,11 @@ react-router-dom@^6.20.1:
 
 react-router@6.20.1:
   version "6.20.1"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/react-router/-/react-router-6.20.1.tgz"
+=======
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.20.1.tgz#e8cc326031d235aaeec405bb234af77cf0fe75ef"
+>>>>>>> origin/5-AdminDashHomePage
   integrity sha512-ccvLrB4QeT5DlaxSFFYi/KR8UMQ4fcD8zBcR71Zp1kaYTC5oJKYAp1cbavzGrogwxca+ubjkd7XjFZKBW8CxPA==
   dependencies:
     "@remix-run/router" "1.13.1"
