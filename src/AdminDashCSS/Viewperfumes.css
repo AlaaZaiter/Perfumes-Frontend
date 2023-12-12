@@ -27,14 +27,9 @@
 }
 .tbcourse{
     width: 100%;
+    margin: 5px;
 }
-.tbcourse >tr>td {
-    border: 1px solid black !important;
-   
-}
-.tbcourse >tr >th {
-    border: 1px solid black !important;
-}
+
 .AddPerfmueButton{
     width: 20%;
     text-align: center;
@@ -83,6 +78,10 @@
     height: 30px;
     border: none;
     background-color: #DCF6F7;
+}
+.edit_delete{
+width: 20px;
+height: 20px;
 }
 
 
