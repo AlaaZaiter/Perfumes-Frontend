@@ -1,0 +1,123 @@
+.FooterAndOurClientsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+}
+.FooterAndOurClientsContainer > div >h1{
+    text-align: center;
+}
+.subOurClients{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: #E6DEEC;
+    justify-content: center;
+    width: 400px;
+    height: 200px;
+    border-radius: 20%;
+    padding: 30px;
+}
+.subOurClients p:first-child{
+    font-size: larger;
+}
+.subOurClients p:nth-child(3){
+    font-size: 15px;
+}
+
+.subOurClientsBTN{
+    display: flex;
+    justify-content: center;
+}
+.subOurClientsBTN button{
+    background-color: #CEB5B3;
+    width: 10px;
+    height: 10px;
+    border: none;
+    margin: 10px;
+    border-radius: 50%;
+}
+.FooterContainer{
+    width: 100%;
+    background-color: #5B6A97;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.FooterContainer > div{
+    display: flex;
+    flex-direction: column;
+}
+.InformationDiv{
+    display: flex;
+    flex-direction: column;
+}
+.SocialDiv{
+    display: flex;
+    flex-direction: column;
+}
+.InformationDiv > div {
+    display: flex;
+    flex-direction: row;
+}
+.InformationDiv  div img {
+    width: 30px;
+    height:30px;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+.SocialDiv  div img {
+    width: 30px;
+    height:30px;
+    border-radius: 50%;
+}
+.SocialDiv  > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px;
+}
+.ContactFooterP{
+font-weight: bold;
+margin-left: 15px;
+}
+.SocialDiv a {
+    text-decoration: none;
+    color: white;
+}
+.SocialDiv a:hover {
+    text-decoration: underline;
+}
+.FooterContainer > div > div{
+    display: flex;
+    flex-direction: row;
+}
+.FooterContainer > div > div > p:first-child{
+    margin-right:10px;
+    font-weight: bold;
+}
+.FooterInputContainer{
+    border-radius: 30px;
+    border: none;
+    background-color: white;
+    padding: 5px;
+    height: 50px;
+    width:300px;
+    margin-top: 30px;
+}
+.FooterInputContainer input{
+border: none;
+border-radius: 30px;
+margin-left: 15px;
+height: 100%;
+width: 70%;
+
+}
+.FooterInputContainer button{
+    border-radius: 30px;
+    border: none;
+    color: #CEB5B3;
+    height: 50px;
+    width: 30%;
+}
