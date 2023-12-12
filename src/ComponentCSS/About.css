@@ -1,0 +1,102 @@
+.AboutbodyA {
+    background-color:white;
+    height:auto;
+    width: auto;
+}
+.AboutluxA{
+    font-style: super bold;
+    background-color: #CEB5B3;
+    border-radius: 0px 0px 100px 100px;
+}
+.AboutimgA9{
+    width: 400px;
+    height: 500px;
+    border-radius: 30px;
+    margin-left: 50px;
+    margin-top: 80px;
+}
+.AboutjustA{
+    font-size: 48px;
+}
+
+.AboutcontainerAA {
+    background-color: #C9C8C9;
+    justify-content: center;
+    height: 750px;
+    width: 100%;
+    color: black;
+    
+}
+.AboutcontainerAB{
+    display: flex;
+}
+
+
+li a:hover {
+    color: rgba(0, 0, 0, 0.507);
+}
+
+.AbouttextareaA {
+    background-color: #5b6a9791;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    width:600px;
+    height: 500px;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px;
+    margin-left: 10px;
+}
+
+
+.AboutloginA{
+    background-color: #5b6a97;
+    color: white;
+    cursor: pointer;
+    border-radius: 30px;
+    width: 155px;
+    height: 51px;
+    margin-top: 40px;
+    border-color: #5b6a97;
+}
+.AboutloginA:hover{
+    background-color: #3e4e73a6;
+}
+@media (min-width: 320px) and (max-width:430px){
+    .AboutimgA9{
+        display: none;
+    }
+   li {
+        flex-direction: column;
+        display: none;
+        cursor: pointer;
+      }
+    
+      .Aboutburger-menu {
+        display: block;
+      }
+      .AbouttextareaA{
+        width:300px;
+        height: 400px;
+        margin-top: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 19px;
+        
+      }
+      .AboutjustA{
+        font-size: 40px;
+    }
+    
+    .AboutcontainerAA{
+        height: 520px;
+        width: 600px;
+        margin-left: 5px;
+    }
+    
+
+}

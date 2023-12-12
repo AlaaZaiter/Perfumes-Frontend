@@ -32,7 +32,7 @@
           </svg>
         </div>
         <ul className="right-nav">
-          <li><a href="#">About</a></li>
+          <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
           <li><button className="login-button">Login</button></li>
         </ul>
