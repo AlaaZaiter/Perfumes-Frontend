@@ -1,25 +1,62 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
-
-
+import axios from "axios";
 import "../AdminDashCSS/AdminDashboard.css";
 import"../AdminDashCSS/Viewperfumes.css"
 const AddSeller = () => {
+    const [fullName, setfullName] = useState("");
+    const [email, setemail] = useState("");
+    const [password, setpassword] = useState("");
+    const [address, setaddress] = useState("");
+    
+    
+  
+    const handleAddPerfume = async () => {
+      // Check if the required fields are not empty
+      if (!fullName || !email || !password || !address  ) {
+        console.error("Please fill in all the required fields.");
+        return;
+      }else{
 
+        try {
+            const response = await axios.post("http://localhost:5000/user/register", {
+              fullName,
+              email,
+              password,
+              address,
+              role: "seller", // Set the role to "seller"
+            });
+      
+            if (response.status === 200) {
+              console.log("Seller added successfully");
+              // Optionally, you can redirect to a different page or perform other actions upon successful addition.
+            } else {
+              console.error("Error adding seller");
+            }
+          } catch (error) {
+            console.error("Error adding seller:", error);
+          }
+
+      }
+   
+      
+  
+    
+    };
   return (
     <div className="bgcardPerfumes">
         <form className="AddPerfumeForm">
         <p>Full Name</p>
-      <input type="text" placeholder="Full Name"/>
+      <input type="text" value={fullName} placeholder="Full Name" onChange={(e)=>setfullName(e.target.value)}/>
       <p>Email</p>
-      <input type="text" placeholder="Email"/>
+      <input type="text" placeholder="Email" value={email} onChange={(e)=>setemail(e.target.value)}/>
       <p>Password</p>
-      <input type="password" placeholder="Password"/>
+      <input type="password" placeholder="Password" value={password} onChange={(e)=>setpassword(e.target.value)}/>
       <p>Address</p>
-      <input type="text" placeholder="Address"/>
+      <input type="text" placeholder="Address" value={address} onChange={(e)=>setaddress(e.target.value)}/>
       
-      <button>save</button>
+      <button onClick={handleAddPerfume}>save</button>
       </form>
       
     </div>
