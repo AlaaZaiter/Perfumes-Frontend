@@ -19,7 +19,7 @@
         };
         return (
           <div>
-            <nav>
+            <nav className='HeaderNav'>
         <ul className="left-nav">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/shop">Shop</Link></li>
