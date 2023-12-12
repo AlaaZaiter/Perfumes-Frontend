@@ -1,8 +1,10 @@
 
 .bodyA {
     background-color: #ceb5b3;
-    height:auto;
-    width: auto;
+    height:100%;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 50px;
 }
 .luxA{
     font-style: super bold;
@@ -10,10 +12,11 @@
     border-radius: 0px 0px 100px 100px;
 }
 .imgA9{
-    width: 468px;
+    width: 400px;
     height: 637px;
     border-radius: 30px;
     margin-left: 50px;
+    margin-top: 10px;
 }
 .justA{
     font-size: 48px;
@@ -27,7 +30,6 @@
     height: 750px;
     width: 1100px;
     color: black;
-    margin-left: 120px;
 }
 .containerAB{
     display: flex;
@@ -79,6 +81,9 @@
 }
 .loginA:hover{
     background-color: #3e4e73a6;
+}
+.elementA{
+    padding: 5px;
 }
 
 @media (min-width: 320px) and (max-width:430px){
