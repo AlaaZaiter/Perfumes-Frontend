@@ -12,7 +12,8 @@ function App() {
 
         <Route path="/contact" element={<Contact />} />
       </Routes>
-    </BrowserRouter>    </div>
+    </BrowserRouter>   
+     </div>
   );
 }
 

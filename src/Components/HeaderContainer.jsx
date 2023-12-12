@@ -18,7 +18,7 @@
           setIsMenuOpen(!isMenuOpen);
         };
         return (
-          <div className="Headercontainer">
+          <div>
             <nav>
         <ul className="left-nav">
           <li><Link to="/">Home</Link></li>
