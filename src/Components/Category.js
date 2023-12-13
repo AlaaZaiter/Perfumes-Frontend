@@ -10,10 +10,14 @@ const Category = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedPerfume, setSelectedPerfume] = useState(null);
+  const [userId,setuserId]=useState("65661bf5dbbe672babb84b3a");
 
   useEffect(() => {
     fetchAllPerfumes();
   }, [selectedCategory]);
+  useEffect(() => {
+    fetchCartByUserId(userId);
+  }, []);
 
   const fetchAllPerfumes = async () => {
     try {
@@ -22,6 +26,18 @@ const Category = () => {
       );
 
       setPerfumes(response.data.data);
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    }
+  };
+  const fetchCartByUserId = async (userid) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}/cart/getByUserId/${userid}`
+      );
+
+      setCart(response.data.data);
     } catch (error) {
       setError(error);
       console.error(error);
@@ -77,23 +93,37 @@ const Category = () => {
     }
   };
 
+  const UpdatePerumesinCart = async (userId) => {
+    try {
+     
+      const response = await axios.put(`${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`, {
+      });
+      setCart(response.data.data);
+    } catch (error) {
+      console.log('There was an error fetching the cart', error);
+    }
+  };
   const addToCart = async () => {
     try {
-      // Add logic to handle adding the selected perfume to the cart
-      // You may want to use the selectedPerfume data here
+     
       const response = await axios.post(`${process.env.REACT_APP_URL}/cart/add`, {
-        perfume: selectedPerfume,
       });
-      setCart(response.data);
+      setCart(response.data.data);
     } catch (error) {
       console.log('There was an error fetching the cart', error);
     }
   };
 
-  const openModal = async (PerfumeId) => {
+  const openModal = async (PerfumeId,userId) => {
     try {
       await fetchAllPerfumesById(PerfumeId);
+      if(cart===null){
+        addToCart(userId);
+      }else{
+        UpdatePerumesinCart(userId)
+      }
       setShowModal(true);
+
     } catch (error) {
       setError(error);
       console.error(error);
@@ -131,7 +161,7 @@ const Category = () => {
                 <button
                   className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   type="button"
-                  onClick={() => openModal(perfume._id)}
+                  onClick={() => openModal(perfume._id,userId)}
                 >
                   Add to Cart
                 </button>
@@ -157,7 +187,7 @@ const Category = () => {
                 {/* Display other details of the selected perfume */}
                 <p>Price: {selectedPerfume.price}</p>
                 {/* Add more details as needed */}
-                <button onClick={addToCart}>Add to Cart</button>
+                <button >Checkout</button>
               </>
             )}
           </div>
