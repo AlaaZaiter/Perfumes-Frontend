@@ -1,71 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../ComponentCSS/bestsaller.css'
+import '../ComponentCSS/bestsaller.css';
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
   const [perfumes, setPerfumes] = useState([]);
-  const [cart, setCart] = useState([]) 
+  const [cart, setCart] = useState(null);
+
+  const [Addedcart, setAddedCart] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [selectedPerfume, setSelectedPerfume] = useState(null);
-  const [userId,setuserId]=useState("65661bf5dbbe672babb84b3a");
+  const [selectedPerfume, setSelectedPerfume] = useState([]);
+  const [userId, setUserId] = useState("657b01d95d56bfa519b3d363");
 
   useEffect(() => {
     fetchAllPerfumes();
-  }, [selectedCategory]);
+  }, []);
   useEffect(() => {
     fetchCartByUserId(userId);
-  }, []);
-
-  const fetchAllPerfumes = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_URL}/perfume/getAllPerfumes`
-      );
-
-      setPerfumes(response.data.data);
-    } catch (error) {
-      setError(error);
-      console.error(error);
-    }
-  };
-  const fetchCartByUserId = async (userid) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_URL}/cart/getByUserId/${userid}`
-      );
-
-      setCart(response.data.data);
-    } catch (error) {
-      setError(error);
-      console.error(error);
-    }
-  };
-
-  const fetchAllPerfumesById = async (PerfumeId) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_URL}/perfume/getPerfumeById/${PerfumeId}`
-      );
-  
-      if (response.data.success) {
-        setSelectedPerfume(response.data.data);
-      } else {
-        // Handle the case where the request was successful, but data is not available
-        console.error("Error fetching perfume data:", response.data.message);
-        setSelectedPerfume(null);
-      }
-    } catch (error) {
-      setError(error);
-      console.error("Error fetching perfume data:", error);
-      setSelectedPerfume(null);
-    }
-  };
-  
-  
-
+  }, [selectedPerfume]);
   useEffect(() => {
     const extractedCategories = perfumes.reduce((acc, perfume) => {
       acc.push(...perfume.category);
@@ -93,40 +47,97 @@ const Category = () => {
     }
   };
 
-  const UpdatePerumesinCart = async (userId) => {
+  const fetchCartByUserId = async () => {
     try {
-     
-      const response = await axios.put(`${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`, {
-      });
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}/cart/getByUserId/${userId}`
+      );
       setCart(response.data.data);
-    } catch (error) {
-      console.log('There was an error fetching the cart', error);
-    }
-  };
-  const addToCart = async () => {
-    try {
-     
-      const response = await axios.post(`${process.env.REACT_APP_URL}/cart/add`, {
-      });
-      setCart(response.data.data);
-    } catch (error) {
-      console.log('There was an error fetching the cart', error);
-    }
-  };
-
-  const openModal = async (PerfumeId,userId) => {
-    try {
-      await fetchAllPerfumesById(PerfumeId);
-      if(cart===null){
-        addToCart(userId);
-      }else{
-        UpdatePerumesinCart(userId)
-      }
-      setShowModal(true);
-
+      console.log(`this is Cart  ${response.data.data}`)
     } catch (error) {
       setError(error);
       console.error(error);
+    }
+  };
+
+  const addToCart = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/cart/add`,
+        {
+          User: "657b07d78a962f76d03b0d7b",
+          perfumes : ["perfume1","Perume2"],
+        }
+      );
+      setAddedCart(response.data.data);
+      console.log(response.data.data)
+    } catch (error) {
+      console.log('There was an error fetching add the cart', error);
+    }
+  };
+  const updatePerfumesInCart = async () => {
+    console.log(selectedPerfume.name)
+
+    try {
+      const response = await axios.put(
+        `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
+        {
+          perfumes : selectedPerfume,
+        }
+      );
+      setAddedCart(response.data.data);
+      console.log(response.data.data)
+    } catch (error) {
+      console.log('There was an error updatng the cart', error);
+    }
+  };
+  const openModal = async (perfumeId) => {
+    try {
+      await fetchCartByUserId(userId);
+      await fetchAllPerfumesById(perfumeId);
+
+      // Check if cart is truthy before performing operations
+      if (cart === null) {
+        await addToCart();
+      } else {
+        await updatePerfumesInCart()
+      }
+      setShowModal(true);
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    }
+  };
+
+  const fetchAllPerfumes = async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}/perfume/getAllPerfumes`
+      );
+      setPerfumes(response.data.data);
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    }
+  };
+
+
+
+  const fetchAllPerfumesById = async (perfumeId) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}/perfume/getPerfumeById/${perfumeId}`
+      );
+      if (response.data.success) {
+        setSelectedPerfume(response.data.data);
+      } else {
+        console.error("Error fetching perfume data:", response.data.message);
+        setSelectedPerfume(null);
+      }
+    } catch (error) {
+      setError(error);
+      console.error("Error fetching perfume data:", error);
+      setSelectedPerfume(null);
     }
   };
 
@@ -143,7 +154,7 @@ const Category = () => {
       </select>
 
       <h2>Perfumes</h2>
-      <div className="grid grid-cols-1 md:grid-cols-3 justify-center ">
+      <div className="grid grid-cols-1 md:grid-cols-3 justify-center">
         {perfumes.map((perfume) => (
           <div key={perfume.id}>
             {perfume.image && (
@@ -161,7 +172,7 @@ const Category = () => {
                 <button
                   className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   type="button"
-                  onClick={() => openModal(perfume._id,userId)}
+                  onClick={() => openModal(perfume._id)}
                 >
                   Add to Cart
                 </button>
@@ -184,10 +195,8 @@ const Category = () => {
             {selectedPerfume && (
               <>
                 <h3>{selectedPerfume.name}</h3>
-                {/* Display other details of the selected perfume */}
                 <p>Price: {selectedPerfume.price}</p>
-                {/* Add more details as needed */}
-                <button >Checkout</button>
+                <button>Checkout</button>
               </>
             )}
           </div>
