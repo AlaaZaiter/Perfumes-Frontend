@@ -85,7 +85,7 @@ const Category = () => {
       // Ensure that selectedPerfume is not an empty array or null
       if (selectedPerfume && selectedPerfume.length > 0) {
         const response = await axios.put(
-          `${process.env.REACT_APP_URL}/cart/updatePerfumesInCart/${userId}`,
+          `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
           {
             perfumes: selectedPerfume,
           }
@@ -220,7 +220,7 @@ const Category = () => {
               selectedPerfume.map((perfume) => (
                 <div key={perfume._id}>
                   <h3>{perfume.name}</h3>
-                  <p>Price: {perfume.price}</p>
+                  <p>Price: {perfume.price }$</p>
                   <p>Description: {perfume.description}</p>
                   <button>Checkout</button>
                 </div>
