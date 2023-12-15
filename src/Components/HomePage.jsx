@@ -11,13 +11,12 @@ import Contact from "./Contact.jsx";
 
 function HomePage() {
     return (
-      <div className="HomePageContainer">
+      <>
         <Header/>
         <Category/>
         <BestSaller/>
         <FooterAndOurClients/>
-        
-      </div>
+      </>
     );
   }
   

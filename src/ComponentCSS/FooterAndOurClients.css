@@ -16,10 +16,11 @@
     line-height: normal;
     margin-top: 5px;
 }
+
 .subOurClients{
     display: flex;
     flex-direction: column;
-    align-items: start;
+    /* align-items: start; */
     background-color: #E6DEEC;
     justify-content: center;
     width: 400px;
@@ -46,11 +47,11 @@
     margin: 10px;
     border-radius: 50%;
 }
+
 .FooterContainer{
     width: 100%;
     background-color: #5B6A97;
     display: flex;
-    flex-direction: row;
     justify-content: space-around;
 }
 .FooterContainer > div{
