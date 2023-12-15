@@ -12,15 +12,11 @@ const Category = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedPerfume, setSelectedPerfume] = useState([]);
-  const [userId, setUserId] = useState("657b01d95d56bfa519b3d363");
+  const [userId, setUserId] = useState("657c3641f2e47b5afdd5bc69");
 
   useEffect(() => {
     fetchAllPerfumes();
   }, []);
-  useEffect(() => {
-    // Perform actions when cart state changes
-    console.log('Cart state updated:', cart);
-  }, [cart]);
   useEffect(() => {
     fetchCartByUserId(userId);
   }, [selectedPerfume]);
@@ -56,13 +52,14 @@ const Category = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_URL}/cart/getByUserId/${userId}`
       );
-      setCart(response.data.data);
-      console.log(`this is Cart  ${response.data.data}`)
+      return response; // Return the entire response
     } catch (error) {
       setError(error);
       console.error(error);
+      return null; // Return null in case of an error
     }
   };
+  
 
   const addToCart = async () => {
     try {
@@ -70,30 +67,16 @@ const Category = () => {
         `${process.env.REACT_APP_URL}/cart/add`,
         {
           User: userId,
-          perfumes : selectedPerfume,
+          perfumes: selectedPerfume,
         }
       );
       setAddedCart(response.data.data);
-      console.log(response.data.data)
+      console.log("added to cart")
     } catch (error) {
       console.log('There was an error fetching add the cart', error);
     }
-    const addToCart = async () => {
-  try {
-    const response = await axios.post(
-      `${process.env.REACT_APP_URL}/cart/add`,
-      {
-        User: userId,
-        perfumes: selectedPerfume,
-      }
-    );
-    setAddedCart(response.data.data);
-    console.log(response.data.data);
-  } catch (error) {
-    console.log('There was an error fetching add the cart', error);
-  }
-};
   };
+
   const updatePerfumesInCart = async () => {
     try {
       console.log('Updating cart with userId:', userId);
@@ -114,24 +97,61 @@ const Category = () => {
       console.log('There was an error updating the cart', error);
     }
   };
+
+  const fetchAllPerfumesById = async (perfumeId) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_URL}/perfume/getPerfumeById/${perfumeId}`
+      );
+  
+      if (response.data.success) {
+        return response.data.data; // Return the perfume data
+      } else {
+        console.error("Error fetching perfume data:", response.data.message);
+        return null; // Return null if there's an error
+      }
+    } catch (error) {
+      setError(error);
+      console.error("Error fetching perfume data:", error);
+      return null; // Return null in case of an error
+    }
+  };
+  
+  
+  
   
   const openModal = async (perfumeId) => {
     try {
-      await fetchCartByUserId(userId);
-      await fetchAllPerfumesById(perfumeId);
-
-      // Check if cart is truthy before performing operations
-      if (cart === null) {
+      // Fetch perfume details and cart concurrently
+      const [perfumeResponse, cartResponse] = await Promise.all([
+        fetchAllPerfumesById(perfumeId),
+        fetchCartByUserId(userId),
+      ]);
+  
+      // Extract perfume details and cart from responses
+      const fetchedPerfume = perfumeResponse;
+      const fetchedCart = cartResponse.data.data;
+  
+      // Check if the user has a cart
+      if (!fetchedCart) {
+        // If cart is null, user does not have a cart, so add the item to the cart
         await addToCart();
       } else {
-        await updatePerfumesInCart()
+        // If cart is not null, user has a cart, so update the existing cart
+        await updatePerfumesInCart();
       }
+  
+      // Set the selected perfume and show the modal
+      setSelectedPerfume([fetchedPerfume]); // Wrap the perfume in an array
       setShowModal(true);
     } catch (error) {
       setError(error);
       console.error(error);
     }
   };
+  
+
+  
 
   const fetchAllPerfumes = async () => {
     try {
@@ -142,26 +162,6 @@ const Category = () => {
     } catch (error) {
       setError(error);
       console.error(error);
-    }
-  };
-
-
-
-  const fetchAllPerfumesById = async (perfumeId) => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_URL}/perfume/getPerfumeById/${perfumeId}`
-      );
-      if (response.data.success) {
-        setSelectedPerfume([response.data.data]);
-      } else {
-        console.error("Error fetching perfume data:", response.data.message);
-        setSelectedPerfume([]);
-      }
-    } catch (error) {
-      setError(error);
-      console.error("Error fetching perfume data:", error);
-      setSelectedPerfume(null);
     }
   };
 
@@ -206,32 +206,31 @@ const Category = () => {
         ))}
       </div>
       {showModal && (
-  <div className="modal">
-    <div className="modal-content">
-      <span
-        className="close"
-        onClick={() => {
-          setShowModal(false);
-        }}
-      >
-        &times;
-      </span>
-      {selectedPerfume && selectedPerfume.length > 0 ? (
-        selectedPerfume.map((perfume) => (
-          <div key={perfume._id}>
-            <h3>{perfume.name}</h3>
-            <p>Price: {perfume.price}</p>
-            <p>Description: {perfume.description}</p>
-            <button>Checkout</button>
+        <div className="modal">
+          <div className="modal-content">
+            <span
+              className="close"
+              onClick={() => {
+                setShowModal(false);
+              }}
+            >
+              &times;
+            </span>
+            {selectedPerfume && selectedPerfume.length > 0 ? (
+              selectedPerfume.map((perfume) => (
+                <div key={perfume._id}>
+                  <h3>{perfume.name}</h3>
+                  <p>Price: {perfume.price}</p>
+                  <p>Description: {perfume.description}</p>
+                  <button>Checkout</button>
+                </div>
+              ))
+            ) : (
+              <p>No perfume details available.</p>
+            )}
           </div>
-        ))
-      ) : (
-        <p>No perfume details available.</p>
+        </div>
       )}
-    </div>
-  </div>
-)}
-
     </div>
   );
 };
