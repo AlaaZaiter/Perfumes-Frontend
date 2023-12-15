@@ -1,22 +1,39 @@
-
-      import React, { useState } from 'react';
+      import  { useEffect, useState } from "react";
       import '../index.css';
-      import { BrowserRouter, Routes,Link, Route } from "react-router-dom";
-      import { useNavigate } from "react-router-dom";
-
-
-      import HomePage from './HomePage';
-      import Contact from './Contact';
+      import { useNavigate , Link} from "react-router-dom";
+      
 
 
       
       const Headercontainer = () => {
-          const [isMenuOpen, setIsMenuOpen] = useState(false);
-          const navigate = useNavigate();
+        const [userID, setUserID] = useState(null);
+        const [isMenuOpen, setIsMenuOpen] = useState(false);
+        const [loggedIn, setLoggedIn] = useState(false);
+        const navigate = useNavigate();
       
         const handleMenuClick = () => {
           setIsMenuOpen(!isMenuOpen);
         };
+      
+        
+        useEffect(() => {
+          setLoggedIn(!!localStorage.getItem("authToken"));
+        }, []);
+        const handleLogin = () => {
+          // setUserID(getUserID());
+          setLoggedIn(true);
+          navigate("/login");
+        };
+      
+        
+        const handleLogout = () => {
+          sessionStorage.removeItem("authToken");
+          localStorage.removeItem("authToken");
+          setLoggedIn(false);
+          navigate("/");
+        };
+      
+
         return (
           <div>
             <nav className='HeaderNav'>
@@ -34,7 +51,12 @@
         <ul className="right-nav">
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-          <li><button className="login-button">Login</button></li>
+          <li> <button
+                className="buy-button"
+                onClick={loggedIn ? handleLogout : handleLogin}
+              >
+                {loggedIn ? "Logout" : "Login"}
+              </button></li>
         </ul>
         <div className="burger-menu" onClick=
         {handleMenuClick}>

@@ -1,8 +1,10 @@
-.AboutbodyA {
+/* .AboutbodyA {
     background-color:white;
     height:auto;
     width: auto;
-}
+} */
+
+
 .AboutluxA{
     font-style: super bold;
     background-color: #CEB5B3;
@@ -21,15 +23,9 @@
 
 .AboutcontainerAA {
     background-color: #C9C8C9;
-    justify-content: center;
-    height: 750px;
-    width: 100%;
-    color: black;
-    
 }
-.AboutcontainerAB{
-    display: flex;
-}
+
+
 
 
 li a:hover {
