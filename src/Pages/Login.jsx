@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-
+import { useNavigate, Link  } from "react-router-dom";
+import css from "../ComponentCSS/login.css";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -10,63 +9,77 @@ function Login() {
   const navigate = useNavigate();
   const validateInput = () => {
     if (!email || !password) {
-      setError("Email and Password are required >:(");
+      setError("Email and Password are required");
       return false;
     }
-
     return true;
   };
-
   useEffect(() => {
     if (sessionStorage.getItem("authToken")) {
       navigate("/");
     }
   }, [navigate]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateInput()) return;
-
     try {
       const response = await axios.post(`${process.env.REACT_APP_URL}/user/login`, {
         email,
         password,
       });
-      console.log(response.data);
-      sessionStorage.setItem("authToken", response.data.data.token);
-      navigate("/");
+      if (response.data && response.data.data) {
+        const token = response.data.data;
+        sessionStorage.setItem("authToken", token);
+        localStorage.setItem('authToken', token);
+        navigate("/");
+      } else {
+        setError("Invalid response from server");
+      }
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error.message);
     }
-  };
-
+  }; 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <h2> Login   </h2>
+    <div className="flex">
+
       {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="w-full p-2 border border-gray-300 rounded-md placeholder:font-light placeholder:text-gray-500">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
+       <div className="column1">
+         <form onSubmit={handleSubmit}>
+            <label className="email-label" >Email</label>
+              <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="email"
+              
+              />
+            <br></br>
+             <label>Password</label>
+              <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="pass"
+             
+              />
+             <br></br>
+           <button type="submit" className="">
+            login
+          </button> 
+         </form>
         </div>
-        <div className="form-input">
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className=""
-          />
+
+        <div className="column2">
+         <h2> Luxperfume </h2>
+          <p>pick your favourite perfume</p>
+           <img  className= "loginImage"src="images/loginImage.jpg" alt="image" />
+           <p>don't have an account
+          {' '}</p>
+          <Link to="/register">
+           <button className="sign-Up-Button">Sign up</button>
+          </Link>
         </div>
-        
-        <button type="submit" className="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)]">
-                 
-        </button> 
-      </form>
+    
     </div>
   );
 }
