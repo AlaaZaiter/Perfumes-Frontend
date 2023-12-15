@@ -18,6 +18,10 @@ const Category = () => {
     fetchAllPerfumes();
   }, []);
   useEffect(() => {
+    // Perform actions when cart state changes
+    console.log('Cart state updated:', cart);
+  }, [cart]);
+  useEffect(() => {
     fetchCartByUserId(userId);
   }, [selectedPerfume]);
   useEffect(() => {
@@ -65,7 +69,7 @@ const Category = () => {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/cart/add`,
         {
-          User: "657b07d78a962f76d03b0d7b",
+          User: userId,
           perfumes : selectedPerfume,
         }
       );
@@ -74,6 +78,21 @@ const Category = () => {
     } catch (error) {
       console.log('There was an error fetching add the cart', error);
     }
+    const addToCart = async () => {
+  try {
+    const response = await axios.post(
+      `${process.env.REACT_APP_URL}/cart/add`,
+      {
+        User: userId,
+        perfumes: selectedPerfume,
+      }
+    );
+    setAddedCart(response.data.data);
+    console.log(response.data.data);
+  } catch (error) {
+    console.log('There was an error fetching add the cart', error);
+  }
+};
   };
   const updatePerfumesInCart = async () => {
     try {
@@ -187,26 +206,32 @@ const Category = () => {
         ))}
       </div>
       {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span
-              className="close"
-              onClick={() => {
-                setShowModal(false);
-              }}
-            >
-              &times;
-            </span>
-            {selectedPerfume && (
-              <>
-                <h3>{selectedPerfume.name}</h3>
-                <p>Price: {selectedPerfume.price}</p>
-                <button>Checkout</button>
-              </>
-            )}
+  <div className="modal">
+    <div className="modal-content">
+      <span
+        className="close"
+        onClick={() => {
+          setShowModal(false);
+        }}
+      >
+        &times;
+      </span>
+      {selectedPerfume && selectedPerfume.length > 0 ? (
+        selectedPerfume.map((perfume) => (
+          <div key={perfume._id}>
+            <h3>{perfume.name}</h3>
+            <p>Price: {perfume.price}</p>
+            <p>Description: {perfume.description}</p>
+            <button>Checkout</button>
           </div>
-        </div>
+        ))
+      ) : (
+        <p>No perfume details available.</p>
       )}
+    </div>
+  </div>
+)}
+
     </div>
   );
 };
