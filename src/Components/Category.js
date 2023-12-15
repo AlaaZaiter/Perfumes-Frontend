@@ -66,7 +66,7 @@ const Category = () => {
         `${process.env.REACT_APP_URL}/cart/add`,
         {
           User: "657b07d78a962f76d03b0d7b",
-          perfumes : ["perfume1","Perume2"],
+          perfumes : selectedPerfume,
         }
       );
       setAddedCart(response.data.data);
@@ -76,21 +76,26 @@ const Category = () => {
     }
   };
   const updatePerfumesInCart = async () => {
-    console.log(selectedPerfume.name)
-
     try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
-        {
-          perfumes : selectedPerfume,
-        }
-      );
-      setAddedCart(response.data.data);
-      console.log(response.data.data)
+      console.log('Updating cart with userId:', userId);
+      console.log('Selected perfumes:', selectedPerfume);
+  
+      // Ensure that selectedPerfume is not an empty array or null
+      if (selectedPerfume && selectedPerfume.length > 0) {
+        const response = await axios.put(
+          `${process.env.REACT_APP_URL}/cart/updatePerfumesInCart/${userId}`,
+          {
+            perfumes: selectedPerfume,
+          }
+        );
+        setAddedCart(response.data.data);
+        console.log("updated successfully");
+      }
     } catch (error) {
-      console.log('There was an error updatng the cart', error);
+      console.log('There was an error updating the cart', error);
     }
   };
+  
   const openModal = async (perfumeId) => {
     try {
       await fetchCartByUserId(userId);
@@ -129,10 +134,10 @@ const Category = () => {
         `${process.env.REACT_APP_URL}/perfume/getPerfumeById/${perfumeId}`
       );
       if (response.data.success) {
-        setSelectedPerfume(response.data.data);
+        setSelectedPerfume([response.data.data]);
       } else {
         console.error("Error fetching perfume data:", response.data.message);
-        setSelectedPerfume(null);
+        setSelectedPerfume([]);
       }
     } catch (error) {
       setError(error);
