@@ -5,6 +5,7 @@ import Contact from './Components/Contact';
 import SellerDashboard from './Components/SellerDashboard';
 import AdminDashboard from './Components/AdminDashboard';
 import About from "./Components/About";
+import ShopPage from './Components/ShopPage';
 
 function App() {
   return (
@@ -12,6 +13,8 @@ function App() {
 <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
+
         <Route path="/seller" element={<SellerDashboard />} />
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/about" element={<About />} />
@@ -21,5 +24,6 @@ function App() {
     </BrowserRouter>   
      </div>
   )}
+
 
 export default App;

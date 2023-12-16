@@ -3,11 +3,13 @@
     height:auto;
     width: auto;
 }
-.AboutluxA{
-    font-style: super bold;
+.AboutluxA {
+    font-style: italic; /* Choose a valid font-style value */
+    font-weight: bold; /* If you want to make it bold */
     background-color: #CEB5B3;
     border-radius: 0px 0px 100px 100px;
 }
+
 .AboutimgA9{
     width: 400px;
     height: 500px;
@@ -37,11 +39,11 @@ li a:hover {
 }
 
 .AbouttextareaA {
-    background-color: #5b6a9791;
+    background-color: #5b6a97; /* Choose a valid color code */
     color: white;
     border: none;
     border-radius: 30px;
-    width:600px;
+    width: 600px;
     height: 500px;
     margin-top: 15px;
     display: flex;
@@ -50,6 +52,7 @@ li a:hover {
     font-size: 28px;
     margin-left: 10px;
 }
+
 
 
 .AboutloginA{
