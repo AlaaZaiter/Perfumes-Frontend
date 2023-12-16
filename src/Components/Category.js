@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../ComponentCSS/bestsaller.css';
+import { useNavigate } from "react-router-dom";
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -13,7 +14,13 @@ const Category = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedPerfume, setSelectedPerfume] = useState([]);
   const [userId, setUserId] = useState("657c3641f2e47b5afdd5bc69");
+  const navigate = useNavigate();
 
+  const handleCheckoutClick = () => {
+    AddOrder()
+    setShowModal(false); // Close the modal before navigating
+    navigate("/checkout");
+  };
   useEffect(() => {
     fetchAllPerfumes();
   }, []);
@@ -25,7 +32,7 @@ const Category = () => {
       acc.push(...perfume.category);
       return acc;
     }, []);
-
+   
     const uniqueCategories = Array.from(new Set(extractedCategories));
     setCategories(uniqueCategories);
   }, [perfumes]);
@@ -59,7 +66,41 @@ const Category = () => {
       return null; // Return null in case of an error
     }
   };
-  
+  const CalculateAmount = ()=>{
+    let amount =0;
+    selectedPerfume.forEach(element => {
+     amount = element.price * element.discount;
+      
+    }
+    )
+    return amount;
+  }
+  const AddOrder = async () => {
+
+    const [perfumeResponse] = await Promise.all([
+      fetchCartByUserId(userId),
+    ]);
+    const fetchedPerfumes= perfumeResponse.data.data.perfumes
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_URL}/order/addOrder`,
+        {
+          perfumes:fetchedPerfumes,
+          amount :CalculateAmount() ,
+          status:"Pending" ,
+          date: new Date(),
+          User: userId,
+    
+   
+        }
+      );
+      console.log("order added");
+
+    } catch (error) {
+      setError(error);
+      console.error(error);
+    }
+  };
 
   const addToCart = async () => {
     try {
@@ -222,7 +263,7 @@ const Category = () => {
                   <h3>{perfume.name}</h3>
                   <p>Price: {perfume.price }$</p>
                   <p>Description: {perfume.description}</p>
-                  <button>Checkout</button>
+                  <button onClick={handleCheckoutClick}>Checkout</button>
                 </div>
               ))
             ) : (
