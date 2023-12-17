@@ -1,25 +1,75 @@
+// Checkout.js
 import axios from 'axios';
-import '../ComponentCSS/CheckoutPage.css';
 import { useState, useEffect } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import PaymentForm from './PaymentForm';
+import '../ComponentCSS/CheckoutPage.css'
 
 function Checkout() {
-  const [userId, setUserId] = useState("657c3641f2e47b5afdd5bc69");
+  const [userId, setUserId] = useState("65661bf5dbbe672babb84b3a");
   const [orders, setOrders] = useState([]);
+  const [accountNumber, setAccountNumber] = useState(1);
+  const [date, setDate] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [stripePromise, setStripePromise] = useState(() => loadStripe(process.env.publishable_Key));
 
   useEffect(() => {
     FetchOrderData();
   }, [userId]);
+  useEffect(() => {
+    FetchOrderData();
+  }, orders);
 
   const FetchOrderData = async () => {
     try {
       const response = await axios.get(`${process.env.REACT_APP_URL}/order/getOrdersByUserId/${userId}`);
-      console.log('Response:', response.data); // Log the entire response
-      setOrders(response.data);
+      console.log('Response:', response.data);
+      setOrders(response.data.filter(order => order.status === "Pending"));
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
   };
 
+  const SetstatusPaid = async (orderId) => {
+    try {
+      const response = await axios.put(`${process.env.REACT_APP_URL}/order/setStatus/${orderId}`, {
+        status: "paid",
+      });
+      console.log("set status to paid");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  
+
+  const handlePayment = async (paymentDetails) => {
+    try {
+      // Send the paymentDetails to your server endpoint
+       
+
+      const response = await axios.post(`${process.env.REACT_APP_URL}/payments/create-payment-intent`, {
+        amount: totalAmount,           // Pass the total amount to your server
+        paymentMethod: "creditCard", // Pass the Payment Method ID to your server
+        accountNumber: accountNumber,  // Use the entered account number
+        userId: userId,                // Pass the user ID to your server
+      });
+
+      // Log the response from the server
+      console.log('Server response:', response.data);
+
+      // After handling payment details, update order status
+    } catch (error) {
+      console.error('Payment error:', error);
+      // Handle error
+    }
+  };
+  const HandleOrderStatus = async () => {
+    for (const order of orders) {
+      await SetstatusPaid(order._id);
+    }
+  };
   const totalAmount = orders.reduce((accumulator, order) => accumulator + order.amount, 0);
 
   return (
@@ -44,10 +94,16 @@ function Checkout() {
               </label>
             </div>
             <p>Payment Details</p>
-            <input type="text" placeholder="Enter Name On Card" />
-            <input type="text" placeholder="Code Number" />
-            <input type="text" placeholder="Expiration Date" />
-            <button>Accept</button>
+            {/* Fields corresponding to your Payment model */}
+            <input type="text" placeholder="Account Number" value={accountNumber} onChange={(e) => setAccountNumber(e.target.value)} />
+            <input type="text" placeholder="Date" value={date} onChange={(e) => setDate(e.target.value)} />
+            {/* 'User' field might be automatically filled based on the logged-in user */}
+            {/* 'paymentMethod' field is filled in the handlePayment function */}
+            {/* Render the PaymentForm component for credit card details */}
+            <Elements stripe={stripePromise}>
+              <PaymentForm handlePayment={handlePayment} />
+            </Elements>
+            <button onClick={HandleOrderStatus}>accept</button>
           </form>
         </div>
         <div></div>

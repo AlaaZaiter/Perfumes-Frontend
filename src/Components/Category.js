@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../ComponentCSS/bestsaller.css';
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -13,20 +15,22 @@ const Category = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedPerfume, setSelectedPerfume] = useState([]);
-  const [userId, setUserId] = useState("657c3641f2e47b5afdd5bc69");
+  const [userId, setUserId] = useState("65661bf5dbbe672babb84b3a");
   const navigate = useNavigate();
 
   const handleCheckoutClick = () => {
     AddOrder()
-    setShowModal(false); // Close the modal before navigating
-    navigate("/checkout");
+    
   };
+
   useEffect(() => {
     fetchAllPerfumes();
   }, []);
+
   useEffect(() => {
     fetchCartByUserId(userId);
   }, [selectedPerfume]);
+
   useEffect(() => {
     const extractedCategories = perfumes.reduce((acc, perfume) => {
       acc.push(...perfume.category);
@@ -66,38 +70,41 @@ const Category = () => {
       return null; // Return null in case of an error
     }
   };
-  const CalculateAmount = ()=>{
-    let amount =0;
-    selectedPerfume.forEach(element => {
-     amount = element.price * element.discount;
-      
-    }
-    )
-    return amount;
-  }
-  const AddOrder = async () => {
 
+  const CalculateAmount = () => {
+    let amount = 0;
+    selectedPerfume.forEach(element => {
+      amount = element.price * element.discount;
+    });
+    return amount;
+  };
+
+  const AddOrder = async () => {
     const [perfumeResponse] = await Promise.all([
       fetchCartByUserId(userId),
     ]);
-    const fetchedPerfumes= perfumeResponse.data.data.perfumes
+    const fetchedPerfumes = perfumeResponse.data.data.perfumes;
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/order/addOrder`,
         {
-          perfumes:fetchedPerfumes,
-          amount :CalculateAmount() ,
-          status:"Pending" ,
+          perfumes: fetchedPerfumes,
+          amount: CalculateAmount(),
+          status: "Pending",
           date: new Date(),
           User: userId,
-    
-   
         }
       );
       console.log("order added");
+      toast.success('Order placed successfully! Redirecting to checkout...');
 
-    } catch (error) {
+    // Wait for a short delay (e.g., 1500 milliseconds or 1.5 seconds)
+    await new Promise(resolve => setTimeout(resolve, 1500));
+      setShowModal(false); // Close the modal before navigating
+      navigate("/checkout");
+        } catch (error) {
       setError(error);
+      toast.error('Error placing the order. Please try again.');
       console.error(error);
     }
   };
@@ -112,9 +119,10 @@ const Category = () => {
         }
       );
       setAddedCart(response.data.data);
-      console.log("added to cart")
+      toast.success('Perfume added to cart successfully!');
     } catch (error) {
-      console.log('There was an error fetching add the cart', error);
+      toast.error('Error adding perfume to cart. Please try again.');
+      console.error('There was an error fetching add the cart', error);
     }
   };
 
@@ -122,8 +130,7 @@ const Category = () => {
     try {
       console.log('Updating cart with userId:', userId);
       console.log('Selected perfumes:', selectedPerfume);
-  
-      // Ensure that selectedPerfume is not an empty array or null
+
       if (selectedPerfume && selectedPerfume.length > 0) {
         const response = await axios.put(
           `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
@@ -132,9 +139,10 @@ const Category = () => {
           }
         );
         setAddedCart(response.data.data);
-        console.log("updated successfully");
+        toast.success('Perfume added to cart successfully!');
       }
     } catch (error) {
+      toast.error('Error adding perfume to cart. Please try again..');
       console.log('There was an error updating the cart', error);
     }
   };
@@ -144,55 +152,43 @@ const Category = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_URL}/perfume/getPerfumeById/${perfumeId}`
       );
-  
+
       if (response.data.success) {
-        return response.data.data; // Return the perfume data
+        return response.data.data;
       } else {
         console.error("Error fetching perfume data:", response.data.message);
-        return null; // Return null if there's an error
+        return null;
       }
     } catch (error) {
       setError(error);
       console.error("Error fetching perfume data:", error);
-      return null; // Return null in case of an error
+      return null;
     }
   };
-  
-  
-  
-  
+
   const openModal = async (perfumeId) => {
     try {
-      // Fetch perfume details and cart concurrently
       const [perfumeResponse, cartResponse] = await Promise.all([
         fetchAllPerfumesById(perfumeId),
         fetchCartByUserId(userId),
       ]);
-  
-      // Extract perfume details and cart from responses
+
       const fetchedPerfume = perfumeResponse;
       const fetchedCart = cartResponse.data.data;
-  
-      // Check if the user has a cart
+
       if (!fetchedCart) {
-        // If cart is null, user does not have a cart, so add the item to the cart
         await addToCart();
       } else {
-        // If cart is not null, user has a cart, so update the existing cart
         await updatePerfumesInCart();
       }
-  
-      // Set the selected perfume and show the modal
-      setSelectedPerfume([fetchedPerfume]); // Wrap the perfume in an array
+
+      setSelectedPerfume([fetchedPerfume]);
       setShowModal(true);
     } catch (error) {
       setError(error);
       console.error(error);
     }
   };
-  
-
-  
 
   const fetchAllPerfumes = async () => {
     try {
@@ -272,6 +268,7 @@ const Category = () => {
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 };

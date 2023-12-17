@@ -8,6 +8,7 @@ import About from "./Components/About";
 import ShopPage from './Components/ShopPage';
 import Checkout from './Components/CheckoutPage';
 
+
 function App() {
   return (
     <div>

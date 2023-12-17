@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../AdminDashCSS/Viewperfumes.css';
 import AddPerfume from "./AddPerfume";
 import axios from "axios";
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ViewPerfumes = (props) => {
   const data = props.Data;
@@ -25,12 +27,14 @@ const ViewPerfumes = (props) => {
   };
 const handleDeletePerfume= async(perfume_id)=>{
   try {
-    const response = await axios.delete(`http://localhost:5000/perfumes/deletePerfumeById/${perfume_id}`)
+    const response = await axios.delete(`http://localhost:5000/perfume/deletePerfumeById/${perfume_id}`)
 if(response.status=200){
-  console.log ("perfume deleted successfully")
+  console.log ("perfume deleted successfully");
+  toast.success('perfume deleted successfully')
 }
   } catch (error) {
-console.error(error)    
+console.error(error)
+toast.error('perfume was not deleted successfully')    
   }
 }
   const handleUpdatePerfume = async () => {
@@ -41,7 +45,7 @@ console.error(error)
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/perfumes/updatePerfume/${editingPerfume._id}`, {
+      const response = await axios.put(`http://localhost:5000/perfume/updatePerfume/${editingPerfume._id}`, {
         name: editingPerfume.name,
         price: editingPerfume.price,
         category: editingPerfume.category,
@@ -67,7 +71,7 @@ console.error(error)
 
   const handleFetchPerfumes = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/perfumes/getAllPerfumes");
+      const response = await axios.get("http://localhost:5000/perfume/getAllPerfumes");
       if (response.status === 200) {
         const data = response.data; // Access the data property directly
         setPerfumes(data.data);
@@ -213,6 +217,7 @@ console.error(error)
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 };
