@@ -1,10 +1,3 @@
-/* .AboutbodyA {
-    background-color:white;
-    height:auto;
-    width: auto;
-} */
-
-
 .AboutluxA{
     font-style: super bold;
     background-color: #CEB5B3;
@@ -17,8 +10,9 @@
     margin-left: 50px;
     margin-top: 80px;
 }
-.AboutjustA{
-    font-size: 48px;
+.about_title{
+    font-size: 45px;
+    font-style: bold;
 }
 
 .AboutcontainerAA {
@@ -32,19 +26,17 @@ li a:hover {
     color: rgba(0, 0, 0, 0.507);
 }
 
-.AbouttextareaA {
+.about_subtitle {
     background-color: #5b6a9791;
     color: white;
     border: none;
     border-radius: 30px;
-    width:600px;
-    height: 500px;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
+    width:500px;
+    height: 480px;
+    display: grid;
     align-items: center;
-    font-size: 28px;
-    margin-left: 10px;
+    font-size: 25px;
+    padding: 1rem;
 }
 
 
@@ -61,32 +53,22 @@ li a:hover {
 .AboutloginA:hover{
     background-color: #3e4e73a6;
 }
-@media (min-width: 320px) and (max-width:430px){
+@media (max-width:768px){
+    .about_title{
+        font-size: 25px;
+        text-align: center;
+    }
+
     .AboutimgA9{
         display: none;
     }
-   li {
-        flex-direction: column;
-        display: none;
-        cursor: pointer;
-      }
-    
-      .Aboutburger-menu {
-        display: block;
-      }
-      .AbouttextareaA{
+      .about_subtitle{
         width:300px;
         height: 400px;
-        margin-top: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 19px;
+        margin-bottom: 15px;
+        font-size: 16px;
         
       }
-      .AboutjustA{
-        font-size: 40px;
-    }
     
     .AboutcontainerAA{
         height: 520px;

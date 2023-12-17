@@ -1,25 +1,28 @@
-import '../index.css';
-import Headercontainer from './HeaderContainer';
-import { Link } from 'react-router-dom';
+import "../index.css";
+import Headercontainer from "./HeaderContainer";
+import "../ComponentCSS/Header.css";
+import { Link } from "react-router-dom";
 
 const Header = () => {
- 
   return (
     <div className="Headercontainer">
-      <Headercontainer/>
-        <div>
+      <Headercontainer />
+      <div className="header_card ">
         <h1 className="content">Discover the</h1>
         <h1 className="content">Fragrance of</h1>
         <h1 className="content">Elegance</h1>
-        <p>Lorem ipsum dolor sit amet,<br />
-          consectetur adipiscing elit,<br />
-          sed do eiusmod tempor<br />
-          incididunt<br />
-          commodoconsequat. Duis aute<br />
-          irure dolor in reprehenderit in<br />
-          voluptate velit esse cillum<br />
-          dolore eu fugiat nulla pariatur.</p>
-       <Link to="/shop"> <button className="buy-button">Buy now</button> </Link>
+        <div> 
+          <p>
+          Discover original perfumes at <strong>Luxperfume</strong>.</p> 
+         <p>Enhance your beauty
+          with our exquisite scents.<br/>
+          Delivery all over lebanon.</p> 
+        </div>
+       
+        <button className="buy-button">
+          {" "}
+          <Link to="/shop">Shop Now!</Link>
+        </button>
       </div>
     </div>
   );

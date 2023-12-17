@@ -1,22 +1,12 @@
-
-.bodyA {
-    background-color: #ceb5b3;
-    height:100%;
-    width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
-}
-.luxA{
+ .luxA{
     font-style: super bold;
     background-color: #CEB5B3;
     border-radius: 0px 0px 100px 100px;
 }
 .imgA9{
-    width: 400px;
-    height: 637px;
+    width: 366px;
+    height: 480px;
     border-radius: 30px;
-    margin-left: 60px;
-    margin-top: 10px;
 }
 .justA{
     font-size: 48px;
@@ -24,38 +14,44 @@
 .letA{
     font-size: 24px;
 }
-.containerAA {
-    justify-content: center;
-    background-color: white;
-    height: 750px;
+.container_contact {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #ceb5b3;
+    color:#d7d7d7;
     width: 100%;
     color: black;
 }
-.containerAB{
-    display: flex;
-}
 
 
-
-.textareaA {
+.input_type {
     background-color: #5b6a9791;
     color: white;
     border: none;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 10px;
     width:532px;
     height: 51px;
     margin-top: 15px;
+    outline: none;
+    padding: 20px;
 }
-.textareaB {
+.textarea {
     background-color: #5b6a9791;
     color: white;
     border: none;
+    outline: none;
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: 10px;
     width:532px;
     height: 216px;
     margin-top: 15px;
+    resize: none;
+    padding: 20px;
+}
+.textarea::placeholder{
+    color: #fff;
 }
 .submitA{
     background-color: #5b6a97;
@@ -63,7 +59,7 @@
     color: white;
     width: 169px;
     height: 51px;
-    border-radius: 30px;
+    border-radius: 20px;
     margin-top: 15px;
     border-color: #5b6a97;
 }
@@ -86,26 +82,15 @@
     padding: 5px;
 }
 
-@media (min-width: 320px) and (max-width:430px){
+@media (min-width: 320px) and (max-width:678px){
     .imgA9{
         display: none;
     }
-   li {
-        flex-direction: column;
-        display: none;
-        cursor: pointer;
+      .input_type{
+        width:100%;
       }
-    
-      .burger-menu {
-        display: block;
-      }
-      .textareaA{
-        width:300px;
-        height: 51px;
-      }
-      .textareaB{
-        width:300px;
-        height: 51px;
+      .textarea {
+        width:100%;
       }
       .justA{
         font-size: 40px;
@@ -113,9 +98,5 @@
     .letA{
         font-size: 18px;
     }
-    .containerAA{
-        height: 420px;
-        width: 600px;
-        margin-left: -5px;
-    }
+   
 }

@@ -5,6 +5,9 @@ import Contact from './Components/Contact';
 import SellerDashboard from './Components/SellerDashboard';
 import AdminDashboard from './Components/AdminDashboard';
 import About from "./Components/About";
+import ShopPage from "./pages/ShopPage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -12,9 +15,9 @@ function App() {
  <Router>
         <Routes>
         
-          {/* <Route path="/login" element={<Login />} /> */}
-          {/* <Route path="/register" element={<Register />} /> */}
-          {/* <Route path="/shoppage" element={<ShopPage />} /> */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/shop" element={<ShopPage />} />
           {/* <Route path="/user" element={<User />} /> */}
           <Route path="/about" element={<About/>} />
           <Route path="/contact" element={<Contact/>} />

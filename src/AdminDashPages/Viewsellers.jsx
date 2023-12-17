@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../AdminDashCSS/Viewperfumes.css';
 import AddSeller from "./AddSeller";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ViewSellers = () => {
   const [activePage, setActivePage] = useState("ViewSellers");
   const [sellers, setSellers] = useState([]);
@@ -26,7 +27,9 @@ const ViewSellers = () => {
     try {
       const response = await axios.delete(`http://localhost:5000/user/delete/${sellerId}`);
       if (response.status === 200) {
-        console.log("Seller deleted successfully");
+        toast.success("Seller deleted S !", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
         // After deleting, fetch the updated list of sellers
         handleFetchSellers();
       }
@@ -100,7 +103,6 @@ const ViewSellers = () => {
               <thead>
                 <tr>
                   <th>Full Name</th>
-                  <th>Password</th>
                   <th>Email</th>
                   <th>Address</th>
                   <th>Edit</th>
@@ -121,17 +123,7 @@ const ViewSellers = () => {
                         seller.fullName
                       )}
                     </td>
-                    <td>
-                      {editingSeller && editingSeller._id === seller._id ? (
-                        <input
-                          type="text"
-                          value={editingSeller.password}
-                          onChange={(e) => handleInputChange(e, "password")}
-                        />
-                      ) : (
-                        seller.password
-                      )}
-                    </td>
+                   
                     <td>
                       {editingSeller && editingSeller._id === seller._id ? (
                         <input

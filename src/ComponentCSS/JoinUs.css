@@ -1,0 +1,36 @@
+.FooterInputContainer{
+    display: grid;
+    position: relative;
+}
+
+.letter{
+    text-align: center;
+    width: 50%;
+    margin: auto;
+   
+}
+
+.letter_title{
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.letter input{
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #5b6a9791;
+    border-radius: 19px;
+    padding: 12px 16px;
+    width: 16rem;
+}
+input::placeholder {
+    color: #fff;
+  }
+
+.btn-footer{
+    color: #000;
+    border: 0;
+    text-decoration: underline;
+    font-size: 19px;
+}

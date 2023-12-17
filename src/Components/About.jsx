@@ -1,15 +1,16 @@
 import React from "react";
 import "../ComponentCSS/About.css";
 import Headercontainer from "./HeaderContainer";
+import Footer from "./Footer";
 
 function About() {
   return (
     <div>
       <Headercontainer />
-      <div className="flex items-center justify-center">
-        <div className="AboutelementA">
-          <h1 className="AboutjustA">OUR MISSION!</h1>
-          <p className="AbouttextareaA">
+      <div className="flex items-center justify-center gap">
+        <div className=" ">
+          <h1 className="about_title">OUR MISSION!</h1>
+          <p className="about_subtitle">
             To weave an aromatic tapestry that transcends the screen, inviting
             you to immerse yourself in a symphony of scents. Guided by passion
             and expertise, we curate an olfactory journey where each fragrance
@@ -28,6 +29,7 @@ function About() {
           />
         </div>
       </div>
+     <Footer/>
     </div>
   );
 }
