@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import '../ComponentCSS/bestsaller.css';
+import '../ComponentCSS/BestSaller.css';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,8 +19,7 @@ const Category = () => {
   const navigate = useNavigate();
 
   const handleCheckoutClick = () => {
-    AddOrder()
-    
+    AddOrder();
   };
 
   useEffect(() => {
@@ -29,6 +28,7 @@ const Category = () => {
 
   useEffect(() => {
     fetchCartByUserId(userId);
+    
   }, [selectedPerfume]);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const Category = () => {
       acc.push(...perfume.category);
       return acc;
     }, []);
-   
+
     const uniqueCategories = Array.from(new Set(extractedCategories));
     setCategories(uniqueCategories);
   }, [perfumes]);
@@ -74,7 +74,7 @@ const Category = () => {
   const CalculateAmount = () => {
     let amount = 0;
     selectedPerfume.forEach(element => {
-      amount = element.price * element.discount;
+      amount += element.price * (1 - element.discount / 100);
     });
     return amount;
   };
@@ -96,20 +96,20 @@ const Category = () => {
         }
       );
       console.log("order added");
-      toast.success('Order placed successfully! Redirecting to checkout...');
+      toast.success('Order placed successfully! Redirecting to checkout.');
 
-    // Wait for a short delay (e.g., 1500 milliseconds or 1.5 seconds)
-    await new Promise(resolve => setTimeout(resolve, 1500));
+      // Wait for a short delay (e.g., 1500 milliseconds or 1.5 seconds)
+      await new Promise(resolve => setTimeout(resolve, 1500));
       setShowModal(false); // Close the modal before navigating
       navigate("/checkout");
-        } catch (error) {
+    } catch (error) {
       setError(error);
       toast.error('Error placing the order. Please try again.');
       console.error(error);
     }
   };
 
-  const addToCart = async () => {
+  const addToCart = async (perfumeId) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/cart/add`,
@@ -119,34 +119,13 @@ const Category = () => {
         }
       );
       setAddedCart(response.data.data);
-      toast.success('Perfume added to cart successfully!');
+
+      updatePerfumeStock(perfumeId); // Pass the perfumeId as an argument
+      console.log("added to cart")
     } catch (error) {
-      toast.error('Error adding perfume to cart. Please try again.');
-      console.error('There was an error fetching add the cart', error);
+      console.log('There was an error fetching add the cart', error);
     }
   };
-
-  const updatePerfumesInCart = async () => {
-    try {
-      console.log('Updating cart with userId:', userId);
-      console.log('Selected perfumes:', selectedPerfume);
-
-      if (selectedPerfume && selectedPerfume.length > 0) {
-        const response = await axios.put(
-          `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
-          {
-            perfumes: selectedPerfume,
-          }
-        );
-        setAddedCart(response.data.data);
-        toast.success('Perfume added to cart successfully!');
-      }
-    } catch (error) {
-      toast.error('Error adding perfume to cart. Please try again..');
-      console.log('There was an error updating the cart', error);
-    }
-  };
-
   const fetchAllPerfumesById = async (perfumeId) => {
     try {
       const response = await axios.get(
@@ -165,25 +144,73 @@ const Category = () => {
       return null;
     }
   };
+  const updatePerfumeStock = async (perfumeId) => {
+    try {
+      // Assuming updatedPerfumes is an array of perfumes
+      const response = await axios.put(
+        `${process.env.REACT_APP_URL}/perfume/updatePerfume/${perfumeId}`,
+        {
+          stock: selectedPerfume[0].stock - 1, // Use selectedPerfume[0].stock
+        }
+      );
+      console.log('Perfume stock updated successfully!');
+    } catch (error) {
+      console.error('Error updating perfume stock. Please try again.');
+      console.log('There was an error updating the stock', error);
+    }
+  };
 
+  
+  const updatePerfumesInCart = async (perfumeId) => {
+    try {
+      console.log('Updating cart with userId:', userId);
+      console.log('Selected perfumes:', selectedPerfume);
+  
+      // Ensure that selectedPerfume is not an empty array or null
+      if (selectedPerfume && selectedPerfume.length > 0) {
+        const response = await axios.put(
+          `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
+          {
+            perfumes: selectedPerfume,
+          }
+        );
+        setAddedCart(response.data.data);
+        updatePerfumeStock(perfumeId);
+        console.log("updated successfully");
+      }
+    } catch (error) {
+      console.log('There was an error updating the cart', error);
+    }
+  };
   const openModal = async (perfumeId) => {
     try {
       const [perfumeResponse, cartResponse] = await Promise.all([
         fetchAllPerfumesById(perfumeId),
         fetchCartByUserId(userId),
       ]);
-
       const fetchedPerfume = perfumeResponse;
       const fetchedCart = cartResponse.data.data;
 
-      if (!fetchedCart) {
-        await addToCart();
-      } else {
-        await updatePerfumesInCart();
-      }
+      if (fetchedPerfume.stock > 0) {
+        // Decrement stock
 
-      setSelectedPerfume([fetchedPerfume]);
-      setShowModal(true);
+        if (!fetchedCart) {
+          // Cart is empty, create a new cart
+          await addToCart(perfumeId);
+        } else {
+          // Update cart with the decremented stock perfume
+          await updatePerfumesInCart(perfumeId);
+        }
+
+        setSelectedPerfume([fetchedPerfume]); // Wrap the perfume in an array
+        updatePerfumeStock();
+        setShowModal(true);
+        toast.success('Perfume added to cart successfully!');
+      } else {
+        // Perfume is out of stock
+        setShowModal(true);
+        toast.warning('This perfume is out of stock.');
+      }
     } catch (error) {
       setError(error);
       console.error(error);
@@ -257,9 +284,17 @@ const Category = () => {
               selectedPerfume.map((perfume) => (
                 <div key={perfume._id}>
                   <h3>{perfume.name}</h3>
-                  <p>Price: {perfume.price }$</p>
+                  <p>Price: ${perfume.price}</p>
                   <p>Description: {perfume.description}</p>
-                  <button onClick={handleCheckoutClick}>Checkout</button>
+                  {perfume.stock > 0 ? (
+                    <React.Fragment>
+                      <button onClick={handleCheckoutClick}>Checkout</button>
+                    </React.Fragment>
+                  ) : (
+                    <React.Fragment>
+                      {toast.error('This perfume is out of stock.')}
+                    </React.Fragment>
+                  )}
                 </div>
               ))
             ) : (
@@ -268,7 +303,7 @@ const Category = () => {
           </div>
         </div>
       )}
-      <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

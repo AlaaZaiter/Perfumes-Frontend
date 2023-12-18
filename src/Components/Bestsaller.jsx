@@ -1,5 +1,5 @@
 // import Image from ''
-import "../ComponentCSS/bestsaller.css";
+import "../ComponentCSS/BestSaller.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 const Bestseller = () => {
@@ -10,7 +10,7 @@ const Bestseller = () => {
   }, []);
 
   const getBestSaller = () => {
-    axios.get(`${process.env.REACT_APP_URL}/perfume/getAllPerfumes`).then((response) => {
+    axios.get(`${process.env.REACT_APP_URL}/perfumes/getAllPerfumes`).then((response) => {
       setPerfumes(response.data.data);
       console.log(response);
     })
@@ -20,7 +20,7 @@ const Bestseller = () => {
 };
 
   return (
-    <div className="container bg-slate-500 w-full">
+    <div className="container mx-auto bg-slate-500 w-full">
       <div className="w-full max-w-sm   border ">
         <img
           className="p-8 rounded-t-lg"

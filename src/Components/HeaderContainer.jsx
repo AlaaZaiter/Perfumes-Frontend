@@ -13,10 +13,13 @@
       const Headercontainer = () => {
           const [isMenuOpen, setIsMenuOpen] = useState(false);
           const navigate = useNavigate();
-      
+        
         const handleMenuClick = () => {
           setIsMenuOpen(!isMenuOpen);
         };
+        const handleLogin = () => {
+          navigate('/login')
+        }
         return (
           <div>
             <nav className='HeaderNav'>
@@ -34,7 +37,7 @@
         <ul className="right-nav">
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-          <li><button className="login-button">Login</button></li>
+          <li><button className="login-button" onClick={handleLogin}> Login</button></li>
         </ul>
         <div className="burger-menu" onClick=
         {handleMenuClick}>
