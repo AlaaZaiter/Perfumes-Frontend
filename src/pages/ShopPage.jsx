@@ -2,7 +2,7 @@ import React from 'react'
 import CategoryData from '../Components/CategoryData'
 import ShopHeader from '../Components/ShopHeader'
 import Footer from '../Components/Footer'
-const ShopPage = () => {
+const ShopPPage = () => {
   return (
     <div>
         <ShopHeader/>
@@ -12,4 +12,4 @@ const ShopPage = () => {
   )
 }
 
-export default ShopPage
+export default ShopPPage
