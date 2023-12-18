@@ -12,12 +12,14 @@ export const getUserRole = () => {
   }
   return null;
 };
+
+
 export const getUserID = () => {
   try {
     const token = sessionStorage.getItem("authToken");
     if (token) {
       const decodedToken = jwtDecode(token);
-      return decodedToken.id;
+      return decodedToken.id || null;
     }
   } catch (error) {
     console.error("Error decoding token:", error);

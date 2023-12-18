@@ -7,7 +7,7 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address , setAddress] = useState("");
-  const [role, setRole] = useState("")
+  const [strengthPassword, setStrengthPassword] =useState('')
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -44,13 +44,15 @@ function Register() {
       fullName,
       email,
       password,
-      address,
+      address
     };
+    
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/user/register`,
         user
       );
+      console.log(response.data);
       sessionStorage.setItem("authToken", response.data.data.token);
 
       navigate("/");
@@ -58,7 +60,28 @@ function Register() {
       setError(error.response.data.error);
     }
   };
+  const checkStrengthPassword = (value) => {
+    const strongRegex = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
+    );
+    const mediumRegex = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})'
+    );
 
+    if (strongRegex.test(value)) {
+      setStrengthPassword(`You'r password is` + '  Strong');
+    } else if (mediumRegex.test(value)) {
+      setStrengthPassword(`You'r password is` + '  Medium');
+    } else {
+      setStrengthPassword(`You'r password is` + '  Weak');
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    const { value } = e.target;
+    setPassword(value);
+    checkStrengthPassword(value);
+  };
   return (
     <div className="card">
       <h2>Register</h2>
@@ -87,7 +110,7 @@ function Register() {
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={handlePasswordChange}
             required
           />
         </div>  
@@ -101,11 +124,10 @@ function Register() {
             required
           />
         </div> 
-        
-        
         <button type="submit" className="submit-button">
           Register
         </button>
+        <p> {strengthPassword}</p>
       </form>
     </div>
   );

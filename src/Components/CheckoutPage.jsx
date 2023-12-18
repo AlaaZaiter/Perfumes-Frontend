@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import PaymentForm from './PaymentForm';
-import '../ComponentCSS/CheckoutPage.css'
+import '../ComponentCSS/CheckoutPage.css';
 
 function Checkout() {
   const [userId, setUserId] = useState("65661bf5dbbe672babb84b3a");
@@ -17,9 +17,6 @@ function Checkout() {
   useEffect(() => {
     FetchOrderData();
   }, [userId]);
-  useEffect(() => {
-    FetchOrderData();
-  }, orders);
 
   const FetchOrderData = async () => {
     try {
@@ -42,16 +39,15 @@ function Checkout() {
     }
   };
 
-  
-
-  const handlePayment = async (paymentDetails) => {
+  const handlePayment = async () => {
+    for (const order of orders) {
+      await SetstatusPaid(order._id);
+    }
     try {
       // Send the paymentDetails to your server endpoint
-       
-
       const response = await axios.post(`${process.env.REACT_APP_URL}/payments/create-payment-intent`, {
         amount: totalAmount,           // Pass the total amount to your server
-        paymentMethod: "creditCard", // Pass the Payment Method ID to your server
+        paymentMethod: "creditCard",   // Pass the Payment Method ID to your server
         accountNumber: accountNumber,  // Use the entered account number
         userId: userId,                // Pass the user ID to your server
       });
@@ -60,16 +56,13 @@ function Checkout() {
       console.log('Server response:', response.data);
 
       // After handling payment details, update order status
+      
     } catch (error) {
       console.error('Payment error:', error);
       // Handle error
     }
   };
-  const HandleOrderStatus = async () => {
-    for (const order of orders) {
-      await SetstatusPaid(order._id);
-    }
-  };
+
   const totalAmount = orders.reduce((accumulator, order) => accumulator + order.amount, 0);
 
   return (
@@ -103,7 +96,7 @@ function Checkout() {
             <Elements stripe={stripePromise}>
               <PaymentForm handlePayment={handlePayment} />
             </Elements>
-            <button onClick={HandleOrderStatus}>accept</button>
+            <button type="button" onClick={handlePayment}>Pay Now</button>
           </form>
         </div>
         <div></div>
@@ -119,22 +112,22 @@ function Checkout() {
                 <p className='orderPar'>Perfumes:</p>
                 {order.perfumes.map((perfume) => (
                   <div key={perfume._id}>
-                    <p className='orderPar'>Name: {perfume.name}</p>
-                    <p className='orderPar'>Image: <img src={perfume.image} alt="Perfume" /></p>
-                    <p className='orderPar'>Price: {perfume.price}</p>
-                    <p className='orderPar'>Discount: {perfume.discount}</p>
-                  </div>
-                ))}
-              </div>
-            ))
-          ) : (
-            <p>No orders details available.</p>
-          )}
-        </div>
-        <p>Total : {totalAmount}</p>
+                  <p className='orderPar'>Name: {perfume.name}</p>
+                  <p className='orderPar'>Image: <img src={perfume.image} alt="Perfume" /></p>
+                  <p className='orderPar'>Price: {perfume.price}</p>
+                  <p className='orderPar'>Discount: {perfume.discount}</p>
+                </div>
+              ))}
+            </div>
+          ))
+        ) : (
+          <p>No orders details available.</p>
+        )}
       </div>
+      <p>Total : {totalAmount}</p>
     </div>
-  );
+  </div>
+);
 }
 
 export default Checkout;

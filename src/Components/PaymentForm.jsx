@@ -15,14 +15,17 @@ function PaymentForm({ handlePayment }) {
 
     const cardElement = elements.getElement(CardElement);
 
-    const { token, error } = await stripe.createToken(cardElement);
+    const { paymentMethod, error } = await stripe.createPaymentMethod({
+      type: 'card',
+      card: cardElement,
+    });
 
     if (error) {
       console.error(error);
       // Handle error
     } else {
-      // Pass the token to the parent component for further processing
-      handlePayment(token);
+      // Pass the PaymentMethod ID to the parent component for further processing
+      handlePayment(paymentMethod.id);
     }
   };
 

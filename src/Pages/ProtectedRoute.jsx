@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { getUserRole } from "../Util/UserDate";
+import { getUserRole } from '../Util/UserDate';
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const isAuthenticated = sessionStorage.getItem("authToken");
   const userRole = getUserRole();

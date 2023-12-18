@@ -1,7 +1,7 @@
 
 import Header from "./Header";
 import Category from "./Category";
-import BestSaller from "./BestSaller.jsx"
+import BestSaller from "./Bestsaller.jsx"
 
 import "../ComponentCSS/HomePageContainer.css";
 import React, { createContext, useContext } from 'react';
