@@ -1,28 +1,30 @@
+import React, { useState } from 'react';
+import '../index.css';
+import { Link, useNavigate } from 'react-router-dom';
 
-      import React, { useState } from 'react';
-      import '../index.css';
-      import { BrowserRouter, Routes,Link, Route } from "react-router-dom";
-      import { useNavigate } from "react-router-dom";
+const Headercontainer = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
+  const authToken = sessionStorage.getItem('authToken');
 
+  const handleMenuClick = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
-      import HomePage from './HomePage';
-      import Contact from './Contact';
+  const handleLogin = () => {
+    navigate('/login');
+  };
 
+  const handleLogout = () => {
+    // Remove the authentication token from sessionStorage
+    sessionStorage.removeItem('authToken');
+    // Redirect the user to the login page or any other desired page
+    navigate('/login');
+  };
 
-      
-      const Headercontainer = () => {
-          const [isMenuOpen, setIsMenuOpen] = useState(false);
-          const navigate = useNavigate();
-        
-        const handleMenuClick = () => {
-          setIsMenuOpen(!isMenuOpen);
-        };
-        const handleLogin = () => {
-          navigate('/login')
-        }
-        return (
-          <div>
-            <nav className='HeaderNav'>
+  return (
+    <div>
+      <nav className="HeaderNav">
         <ul className="left-nav">
           <li><Link to="/">Home</Link></li>
           <li><Link to="/shop">Shop</Link></li>
@@ -37,18 +39,20 @@
         <ul className="right-nav">
           <li><Link to="/about">About</Link></li>
           <li><Link to="/contact">Contact</Link></li>
-          <li><button className="login-button" onClick={handleLogin}> Login</button></li>
+          {authToken ? (
+            <li><button className="login-button" onClick={handleLogout}>Logout</button></li>
+          ) : (
+            <li><button className="login-button" onClick={handleLogin}>Login</button></li>
+          )}
         </ul>
-        <div className="burger-menu" onClick=
-        {handleMenuClick}>
+        <div className="burger-menu" onClick={handleMenuClick}>
           <div className={`line ${isMenuOpen ? 'active' : 'Shop'}`}>shop</div>
           <div className={`line ${isMenuOpen ? 'active' : 'Category'}`}>about</div>
           <div className={`line ${isMenuOpen ? 'active' : 'Contact'}`}>login</div>
         </div>
       </nav>
+    </div>
+  );
+};
 
-          </div>
-        );
-      };
-      
-      export default Headercontainer;
+export default Headercontainer;

@@ -5,9 +5,11 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
 import PaymentForm from './PaymentForm';
 import '../ComponentCSS/CheckoutPage.css';
+import { getUserID } from "../Util/UserDate";
+
 
 function Checkout() {
-  const data = { userId: localStorage.getItem('userId') }
+  const[userId,setUserId]=useState("")
   const [orders, setOrders] = useState([]);
   const [accountNumber, setAccountNumber] = useState(1);
   const [date, setDate] = useState("");
@@ -15,14 +17,19 @@ function Checkout() {
   const [stripePromise, setStripePromise] = useState(() => loadStripe(process.env.publishable_Key));
 
   useEffect(() => {
+    setUserId(getUserID());
+  }, []);
+  useEffect(() => {
     FetchOrderData();
-  }, [data.userId]);
+    setUserId(getUserID());
+
+  }, [userId]);
 
   const FetchOrderData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_URL}/order/getOrdersByUserId/${data.userId}`);
+      const response = await axios.get(`${process.env.REACT_APP_URL}/order/getOrdersByUserId/${userId}`);
       console.log('Response:', response.data);
-      setOrders(response.data.filter(order => order.status === "Pending"));
+      setOrders(response.data.data.filter(order => order.status === "Pending"));
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
@@ -40,16 +47,20 @@ function Checkout() {
   };
 
   const handlePayment = async () => {
-    for (const order of orders) {
-      await SetstatusPaid(order._id);
-    }
+    
     try {
+      for (const order of orders) {
+        await SetstatusPaid(order._id);
+      }
+  
+      // Refetch orders to get the updated status
+      FetchOrderData();
       // Send the paymentDetails to your server endpoint
       const response = await axios.post(`${process.env.REACT_APP_URL}/payments/create-payment-intent`, {
         amount: totalAmount,           // Pass the total amount to your server
         paymentMethod: "creditCard",   // Pass the Payment Method ID to your server
         accountNumber: accountNumber,  // Use the entered account number
-        userId: data.userId,                // Pass the user ID to your server
+        userId: userId,                // Pass the user ID to your server
       });
 
       // Log the response from the server

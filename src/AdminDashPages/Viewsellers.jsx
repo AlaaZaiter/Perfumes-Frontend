@@ -24,7 +24,7 @@ const ViewSellers = () => {
 
   const handleDeleteSeller = async (sellerId) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/user/delete/${sellerId}`);
+      const response = await axios.delete(`${process.env.REACT_APP_URL}/user/delete/${sellerId}`);
       if (response.status === 200) {
         console.log("Seller deleted successfully");
         // After deleting, fetch the updated list of sellers
@@ -37,17 +37,17 @@ const ViewSellers = () => {
 
   const handleUpdateSeller = async () => {
     // Check if the required fields are not empty
-    if (!editingSeller.fullName || !editingSeller.password || !editingSeller.email || !editingSeller.address) {
+    if (!editingSeller.fullName  || !editingSeller.email || !editingSeller.address) {
       console.error("Please fill in all the required fields.");
       return;
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/user/update/${editingSeller._id}`, {
+      const response = await axios.put(`${process.env.REACT_APP_URL}/user/update/${editingSeller._id}`, {
         fullName: editingSeller.fullName,
-        password: editingSeller.password,
         email: editingSeller.email,
         address: editingSeller.address,
+        role : "seller",
       });
 
       if (response.status === 200) {
@@ -66,7 +66,7 @@ const ViewSellers = () => {
 
   const handleFetchSellers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/user/get");
+      const response = await axios.get(`${process.env.REACT_APP_URL}/user/get`);
       if (response.status === 200) {
         const data = response.data; // Access the data property directly
         setSellers(data.data.filter(user => user.role === "seller"));
@@ -100,7 +100,6 @@ const ViewSellers = () => {
               <thead>
                 <tr>
                   <th>Full Name</th>
-                  <th>Password</th>
                   <th>Email</th>
                   <th>Address</th>
                   <th>Edit</th>
@@ -121,17 +120,7 @@ const ViewSellers = () => {
                         seller.fullName
                       )}
                     </td>
-                    <td>
-                      {editingSeller && editingSeller._id === seller._id ? (
-                        <input
-                          type="text"
-                          value={editingSeller.password}
-                          onChange={(e) => handleInputChange(e, "password")}
-                        />
-                      ) : (
-                        seller.password
-                      )}
-                    </td>
+                    
                     <td>
                       {editingSeller && editingSeller._id === seller._id ? (
                         <input
@@ -182,14 +171,3 @@ const ViewSellers = () => {
 };
 
 export default ViewSellers;
-/*{
-  "order": 1,
-  "perfumes": ["perfume1", "perfume2"],
-  "amount": 100.50,
-  "status": "Pending",
-  "date": "2023-12-05T12:00:00.000Z",
-  "User": "user_id_here", 
-  "Payment": "payment_id_here" // Replace with a valid payment ID
-}
-
-*/ 

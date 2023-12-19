@@ -32,7 +32,7 @@ const AddPerfume = () => {
     PerfumeData.append("stock", stock);
 
     try {
-      const response = await axios.post("http://localhost:5000/perfume/addPerfume", PerfumeData);
+      const response = await axios.post(`${process.env.REACT_APP_URL}/perfume/addPerfume`, PerfumeData);
 
       if (response.status === 200) {
         console.log("Perfume added successfully");

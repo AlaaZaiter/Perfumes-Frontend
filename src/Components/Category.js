@@ -4,6 +4,8 @@ import '../ComponentCSS/bestsaller.css';
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getUserID } from "../Util/UserDate";
+
 
 const Category = () => {
   const [categories, setCategories] = useState([]);
@@ -14,7 +16,7 @@ const Category = () => {
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedPerfume, setSelectedPerfume] = useState([]);
-  const data = { userId: localStorage.getItem('userId') }
+  const[userId,setUserId]=useState("")
   const navigate = useNavigate();
 
   const handleCheckoutClick = () => {
@@ -23,10 +25,11 @@ const Category = () => {
 
   useEffect(() => {
     fetchAllPerfumes();
+    setUserId(getUserID());
   }, []);
 
   useEffect(() => {
-    fetchCartByUserId(data.userId._id);
+    fetchCartByUserId(userId);
     
   }, [selectedPerfume]);
 
@@ -60,7 +63,7 @@ const Category = () => {
   const fetchCartByUserId = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_URL}/cart/getByUserId/${data.userId._id}`
+        `${process.env.REACT_APP_URL}/cart/getByUserId/${userId}`
       );
       return response; // Return the entire response
     } catch (error) {
@@ -81,7 +84,7 @@ const Category = () => {
   const AddOrder = async () => {
     try {
       const [perfumeResponse] = await Promise.all([
-        fetchCartByUserId(data.userId._id),
+        fetchCartByUserId(userId),
       ]);
       const fetchedPerfumes = perfumeResponse.data.data?.perfumes || [];
       
@@ -92,7 +95,7 @@ const Category = () => {
           amount: CalculateAmount(),
           status: "Pending",
           date: new Date(),
-          User: data.userId._id,
+          User: userId,
         }
       );
       console.log("order added");
@@ -115,7 +118,7 @@ const Category = () => {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/cart/add`,
         {
-          User: data.userId._id,
+          User: userId,
           perfumes: selectedPerfume,
         }
       );
@@ -149,13 +152,13 @@ const Category = () => {
   
   const updatePerfumesInCart = async (perfumeId) => {
     try {
-      console.log('Updating cart with userId:', data.userId._id);
+      console.log('Updating cart with userId:', userId);
       console.log('Selected perfumes:', selectedPerfume);
   
       // Ensure that selectedPerfume is not an empty array or null
       if (selectedPerfume && selectedPerfume.length > 0) {
         const response = await axios.put(
-          `${process.env.REACT_APP_URL}/cart/updatePerfumes/${data.userId._id}`,
+          `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
           {
             perfumes: selectedPerfume,
           }
@@ -171,7 +174,7 @@ const Category = () => {
     try {
       const [perfumeResponse, cartResponse] = await Promise.all([
         fetchAllPerfumesById(perfumeId),
-        fetchCartByUserId(data.userId._id),
+        fetchCartByUserId(userId),
       ]);
       const fetchedPerfume = perfumeResponse;
       const fetchedCart = cartResponse.data.data;
@@ -189,7 +192,7 @@ const Category = () => {
 
         setSelectedPerfume([fetchedPerfume]); // Wrap the perfume in an array
         setShowModal(true);
-        console.log("user id"+data.userId._id)
+        console.log("user id"+userId)
         console.log("perfume id"+perfumeId)
 
         toast.success('Perfume added to cart successfully!');

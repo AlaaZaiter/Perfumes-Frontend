@@ -25,7 +25,7 @@ const ViewPerfumes = (props) => {
   };
 const handleDeletePerfume= async(perfume_id)=>{
   try {
-    const response = await axios.delete(`http://localhost:5000/perfumes/deletePerfumeById/${perfume_id}`)
+    const response = await axios.delete(`${process.env.REACT_APP_URL}/perfume/deletePerfumeById/${perfume_id}`)
 if(response.status=200){
   console.log ("perfume deleted successfully")
 }
@@ -41,7 +41,7 @@ console.error(error)
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/perfumes/updatePerfume/${editingPerfume._id}`, {
+      const response = await axios.put(`${process.env.REACT_APP_URL}/perfume/updatePerfume/${editingPerfume._id}`, {
         name: editingPerfume.name,
         price: editingPerfume.price,
         category: editingPerfume.category,
@@ -61,13 +61,13 @@ console.error(error)
         console.error("Error updating perfume");
       }
     } catch (error) {
-      console.error("Error updating perfume:", error);
+      console.error(`Error fetch updating perfume: ${editingPerfume._id}`, error);
     }
   };
 
   const handleFetchPerfumes = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/perfumes/getAllPerfumes");
+      const response = await axios.get(`${process.env.REACT_APP_URL}/perfume/getAllPerfumes`);
       if (response.status === 200) {
         const data = response.data; // Access the data property directly
         setPerfumes(data.data);
