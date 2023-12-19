@@ -1,28 +1,16 @@
 import "../ComponentCSS/BestSaller.css";
-import { useState, useEffect } from "react";
-// import { Animator, ScrollContainer, ScrollPage,batch, Fade , FadeIn  } from "react-scroll-motion";
+import { Link } from "react-router-dom";
 const Bestseller = () => {
-  // const [fadeIn, setFadeIn] = useState(false);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     if (!fadeIn && window.scrollY > 100) {
-  //       setFadeIn(true);
-  //     }
-  //   };
 
-  //   window.addEventListener("scroll", handleScroll);
-    
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [fadeIn]);
 
   return (
-    <div className="container ">
+    <div className="container  m-3">
       
       <div className="cart_seller">        
       <div className="cart_image">
           <img
-            className="p-8 rounded-t-lg"
+            className=""
             src="images/perfume.png"
             alt="product image"
           />
@@ -32,17 +20,15 @@ const Bestseller = () => {
             COCO CHANEL
           </h5>
           <div className="seller_btn">
-            <button>Shop Now</button>
+            <button><Link to='/shop'>Shop Now</Link> </button>
           </div>
         </div>
       </div>
-    {/* <ScrollPage page={1}>
-          <Fade>
-          <FadeIn>
-      <div className="cart_seller">
-        <div className="cart_image">
+      
+      <div className="cart_seller">        
+      <div className="cart_image">
           <img
-            className="p-8 rounded-t-lg"
+            className=""
             src="images/perfume.png"
             alt="product image"
           />
@@ -52,17 +38,14 @@ const Bestseller = () => {
             COCO CHANEL
           </h5>
           <div className="seller_btn">
-            <button>Shop Now</button>
+            <button><Link to='/shop'>Shop Now</Link> </button>
           </div>
         </div>
       </div>
-      </FadeIn>
-          </Fade>
-        </ScrollPage> */}
-      {/* <div className="cart_seller">
-        <div className="cart_image">
+      <div className="cart_seller">        
+      <div className="cart_image">
           <img
-            className="p-8 rounded-t-lg"
+            className=""
             src="images/perfume.png"
             alt="product image"
           />
@@ -72,15 +55,14 @@ const Bestseller = () => {
             COCO CHANEL
           </h5>
           <div className="seller_btn">
-            <button>Shop Now</button>
+            <button><Link to='/shop'>Shop Now</Link> </button>
           </div>
         </div>
       </div>
-
-      <div className="cart_seller">
-        <div className="cart_image">
+      <div className="cart_seller">        
+      <div className="cart_image">
           <img
-            className="p-8 rounded-t-lg"
+            className=""
             src="images/perfume.png"
             alt="product image"
           />
@@ -90,15 +72,14 @@ const Bestseller = () => {
             COCO CHANEL
           </h5>
           <div className="seller_btn">
-            <button>Shop Now</button>
+            <button><Link to='/shop'>Shop Now</Link> </button>
           </div>
         </div>
       </div>
-
-      <div className="cart_seller">
-        <div className="cart_image">
+      <div className="cart_seller">        
+      <div className="cart_image">
           <img
-            className="p-8 rounded-t-lg"
+            className=""
             src="images/perfume.png"
             alt="product image"
           />
@@ -108,79 +89,10 @@ const Bestseller = () => {
             COCO CHANEL
           </h5>
           <div className="seller_btn">
-            <button>Shop Now</button>
+            <button><Link to='/shop'>Shop Now</Link> </button>
           </div>
         </div>
       </div>
-
-      <div className="cart_seller">
-        <div className="cart_image">
-          <img
-            className="p-8 rounded-t-lg"
-            src="images/perfume.png"
-            alt="product image"
-          />
-        </div>
-        <div className="cart_body">
-          <h5 className="text-xl font-semibold tracking-tight text-center dark:text-black">
-            COCO CHANEL
-          </h5>
-          <div className="seller_btn">
-            <button>Shop Now</button>
-          </div>
-        </div>
-      </div>
-      <div className="cart_seller">
-        <div className="cart_image">
-          <img
-            className="p-8 rounded-t-lg"
-            src="images/perfume.png"
-            alt="product image"
-          />
-        </div>
-        <div className="cart_body">
-          <h5 className="text-xl font-semibold tracking-tight text-center dark:text-black">
-            COCO CHANEL
-          </h5>
-          <div className="seller_btn">
-            <button>Shop Now</button>
-          </div>
-        </div>
-      </div>
-      <div className="cart_seller">
-        <div className="cart_image">
-          <img
-            className="p-8 rounded-t-lg"
-            src="images/perfume.png"
-            alt="product image"
-          />
-        </div>
-        <div className="cart_body">
-          <h5 className="text-xl font-semibold tracking-tight text-center dark:text-black">
-            COCO CHANEL
-          </h5>
-          <div className="seller_btn">
-            <button>Shop Now</button>
-          </div>
-        </div>
-      </div>
-      <div className="cart_seller">
-        <div className="cart_image">
-          <img
-            className="p-8 rounded-t-lg"
-            src="images/perfume.png"
-            alt="product image"
-          />
-        </div>
-        <div className="cart_body">
-          <h5 className="text-xl font-semibold tracking-tight text-center dark:text-black">
-            COCO CHANEL
-          </h5>
-          <div className="seller_btn">
-            <button>Shop Now</button>
-          </div>
-        </div>
-      </div> */}
     </div>
   );
 };

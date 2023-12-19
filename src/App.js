@@ -8,17 +8,21 @@ import About from "./Components/About";
 import ShopPage from "./pages/ShopPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Checkout from "./pages/CheckoutPage";
+import User from "./user/User";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
     <div>
  <Router>
         <Routes>
-        
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/shop" element={<ShopPage />} />
-          {/* <Route path="/user" element={<User />} /> */}
+          <Route path="/user" element={<User />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/about" element={<About/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/" element={<HomePage/>} />
@@ -33,6 +37,7 @@ function App() {
          <Route path="/Seller" element={<SellerDashboard/>} />
           {/* <Route path="*" element={<NotFound />} /> */}
         </Routes>
+         <ToastContainer />
       </Router>
      </div>
   )}

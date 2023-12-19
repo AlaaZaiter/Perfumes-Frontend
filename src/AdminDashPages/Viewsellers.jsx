@@ -25,7 +25,7 @@ const ViewSellers = () => {
 
   const handleDeleteSeller = async (sellerId) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/user/delete/${sellerId}`);
+      const response = await axios.delete(`${process.env.REACT_APP_URL}/user/delete/${sellerId}`);
       if (response.status === 200) {
         toast.success("Seller deleted S !", {
           position: toast.POSITION.TOP_RIGHT,
@@ -46,7 +46,7 @@ const ViewSellers = () => {
     }
 
     try {
-      const response = await axios.put(`http://localhost:5000/user/update/${editingSeller._id}`, {
+      const response = await axios.put(`${process.env.REACT_APP_URL}/user/update/${editingSeller._id}`, {
         fullName: editingSeller.fullName,
         password: editingSeller.password,
         email: editingSeller.email,
@@ -69,7 +69,7 @@ const ViewSellers = () => {
 
   const handleFetchSellers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/user/get");
+      const response = await axios.get(`${process.env.REACT_APP_URL}/user/get`);
       if (response.status === 200) {
         const data = response.data; // Access the data property directly
         setSellers(data.data.filter(user => user.role === "seller"));

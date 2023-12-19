@@ -47,15 +47,11 @@
 .view-products:hover {
     background-color: #e0e0e0;
 }
-.CategoryTitle{
+
+.Category_title {
     text-align: center;
-}
-.content {
-    font-family: Inter;
     font-size: 50px;
-    font-style: normal;
     font-weight: 800;
-    line-height: normal;
     margin-top: 5px;
 }
 .containerAa {
@@ -108,8 +104,12 @@
     margin-top: 72px;
 }
 
-@media (min-width: 320px) and (max-width:430px){
+@media (min-width: 320px) and (max-width:768px){
     .elementBs, .elementCs , .elementBa , .elementCa , .elementDa{
         display: none;
+    }
+
+    .Category_title {
+        font-size: 24px;
     }
 }
