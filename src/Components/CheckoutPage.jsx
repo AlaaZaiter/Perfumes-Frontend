@@ -96,7 +96,6 @@ function Checkout() {
             <Elements stripe={stripePromise}>
               <PaymentForm handlePayment={handlePayment} />
             </Elements>
-            <button type="button" onClick={handlePayment}>Pay Now</button>
           </form>
         </div>
         <div></div>
