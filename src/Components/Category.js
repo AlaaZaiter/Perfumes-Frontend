@@ -9,13 +9,12 @@ const Category = () => {
   const [categories, setCategories] = useState([]);
   const [perfumes, setPerfumes] = useState([]);
   const [cart, setCart] = useState(null);
-
   const [Addedcart, setAddedCart] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [error, setError] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [selectedPerfume, setSelectedPerfume] = useState([]);
-  const [userId, setUserId] = useState("65661bf5dbbe672babb84b3a");
+  const data = { userId: localStorage.getItem('userId') }
   const navigate = useNavigate();
 
   const handleCheckoutClick = () => {
@@ -27,7 +26,7 @@ const Category = () => {
   }, []);
 
   useEffect(() => {
-    fetchCartByUserId(userId);
+    fetchCartByUserId(data.userId._id);
     
   }, [selectedPerfume]);
 
@@ -61,7 +60,7 @@ const Category = () => {
   const fetchCartByUserId = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_URL}/cart/getByUserId/${userId}`
+        `${process.env.REACT_APP_URL}/cart/getByUserId/${data.userId._id}`
       );
       return response; // Return the entire response
     } catch (error) {
@@ -80,11 +79,12 @@ const Category = () => {
   };
 
   const AddOrder = async () => {
-    const [perfumeResponse] = await Promise.all([
-      fetchCartByUserId(userId),
-    ]);
-    const fetchedPerfumes = perfumeResponse.data.data.perfumes;
     try {
+      const [perfumeResponse] = await Promise.all([
+        fetchCartByUserId(data.userId._id),
+      ]);
+      const fetchedPerfumes = perfumeResponse.data.data?.perfumes || [];
+      
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/order/addOrder`,
         {
@@ -92,12 +92,12 @@ const Category = () => {
           amount: CalculateAmount(),
           status: "Pending",
           date: new Date(),
-          User: userId,
+          User: data.userId._id,
         }
       );
       console.log("order added");
       toast.success('Order placed successfully! Redirecting to checkout.');
-
+  
       // Wait for a short delay (e.g., 1500 milliseconds or 1.5 seconds)
       await new Promise(resolve => setTimeout(resolve, 1500));
       setShowModal(false); // Close the modal before navigating
@@ -108,19 +108,19 @@ const Category = () => {
       console.error(error);
     }
   };
+  
 
   const addToCart = async (perfumeId) => {
     try {
       const response = await axios.post(
         `${process.env.REACT_APP_URL}/cart/add`,
         {
-          User: userId,
+          User: data.userId._id,
           perfumes: selectedPerfume,
         }
       );
       setAddedCart(response.data.data);
 
-      updatePerfumeStock(perfumeId); // Pass the perfumeId as an argument
       console.log("added to cart")
     } catch (error) {
       console.log('There was an error fetching add the cart', error);
@@ -144,38 +144,23 @@ const Category = () => {
       return null;
     }
   };
-  const updatePerfumeStock = async (perfumeId) => {
-    try {
-      // Assuming updatedPerfumes is an array of perfumes
-      const response = await axios.put(
-        `${process.env.REACT_APP_URL}/perfume/updatePerfume/${perfumeId}`,
-        {
-          stock: selectedPerfume[0].stock - 1, // Use selectedPerfume[0].stock
-        }
-      );
-      console.log('Perfume stock updated successfully!');
-    } catch (error) {
-      console.error('Error updating perfume stock. Please try again.');
-      console.log('There was an error updating the stock', error);
-    }
-  };
+ 
 
   
   const updatePerfumesInCart = async (perfumeId) => {
     try {
-      console.log('Updating cart with userId:', userId);
+      console.log('Updating cart with userId:', data.userId._id);
       console.log('Selected perfumes:', selectedPerfume);
   
       // Ensure that selectedPerfume is not an empty array or null
       if (selectedPerfume && selectedPerfume.length > 0) {
         const response = await axios.put(
-          `${process.env.REACT_APP_URL}/cart/updatePerfumes/${userId}`,
+          `${process.env.REACT_APP_URL}/cart/updatePerfumes/${data.userId._id}`,
           {
             perfumes: selectedPerfume,
           }
         );
         setAddedCart(response.data.data);
-        updatePerfumeStock(perfumeId);
         console.log("updated successfully");
       }
     } catch (error) {
@@ -186,7 +171,7 @@ const Category = () => {
     try {
       const [perfumeResponse, cartResponse] = await Promise.all([
         fetchAllPerfumesById(perfumeId),
-        fetchCartByUserId(userId),
+        fetchCartByUserId(data.userId._id),
       ]);
       const fetchedPerfume = perfumeResponse;
       const fetchedCart = cartResponse.data.data;
@@ -203,8 +188,10 @@ const Category = () => {
         }
 
         setSelectedPerfume([fetchedPerfume]); // Wrap the perfume in an array
-        updatePerfumeStock();
         setShowModal(true);
+        console.log("user id"+data.userId._id)
+        console.log("perfume id"+perfumeId)
+
         toast.success('Perfume added to cart successfully!');
       } else {
         // Perfume is out of stock

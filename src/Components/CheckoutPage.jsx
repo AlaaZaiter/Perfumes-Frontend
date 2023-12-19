@@ -7,7 +7,7 @@ import PaymentForm from './PaymentForm';
 import '../ComponentCSS/CheckoutPage.css';
 
 function Checkout() {
-  const [userId, setUserId] = useState("65661bf5dbbe672babb84b3a");
+  const data = { userId: localStorage.getItem('userId') }
   const [orders, setOrders] = useState([]);
   const [accountNumber, setAccountNumber] = useState(1);
   const [date, setDate] = useState("");
@@ -16,11 +16,11 @@ function Checkout() {
 
   useEffect(() => {
     FetchOrderData();
-  }, [userId]);
+  }, [data.userId]);
 
   const FetchOrderData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_URL}/order/getOrdersByUserId/${userId}`);
+      const response = await axios.get(`${process.env.REACT_APP_URL}/order/getOrdersByUserId/${data.userId}`);
       console.log('Response:', response.data);
       setOrders(response.data.filter(order => order.status === "Pending"));
     } catch (error) {
@@ -49,7 +49,7 @@ function Checkout() {
         amount: totalAmount,           // Pass the total amount to your server
         paymentMethod: "creditCard",   // Pass the Payment Method ID to your server
         accountNumber: accountNumber,  // Use the entered account number
-        userId: userId,                // Pass the user ID to your server
+        userId: data.userId,                // Pass the user ID to your server
       });
 
       // Log the response from the server
