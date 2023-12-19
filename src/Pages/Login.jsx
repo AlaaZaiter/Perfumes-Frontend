@@ -40,7 +40,7 @@ function Login() {
     }
   }; 
   return (
-    <div className="flex">
+    <div className="flex ">
 
       {error && <p className="error-message">{error}</p>}
        <div className="column1">
@@ -63,15 +63,17 @@ function Login() {
              
               />
              <br></br>
-           <button type="submit" className="">
-            login
-          </button> 
-         </form>
-        </div>
+             <br></br>
+             <button className="Login-Button">Log In</button>
+             </form>
+
+         </div>
+
 
         <div className="column2">
-         <h2> Luxperfume </h2>
-          <p>pick your favourite perfume</p>
+         <h2 className="login-title"> Luxperfume </h2>
+          <p>pick your favourite 
+            perfume</p>
            <img  className= "loginImage"src="images/loginImage.jpg" alt="image" />
            <p>don't have an account
           {' '}</p>
@@ -79,8 +81,8 @@ function Login() {
            <button className="sign-Up-Button">Sign up</button>
           </Link>
         </div>
-    
-    </div>
+
+</div>
   );
 }
 export default Login;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "../ComponentCSS/register.css";
 
 function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address , setAddress] = useState("");
-  const [role, setRole] = useState("")
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -60,55 +60,60 @@ function Register() {
   };
 
   return (
-    <div className="card">
-      <h2>Register</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit}>
+    <div className="register">
+    <div className="card-register">
+    {error && <p className="error-message">{error}</p>}
+    <form onSubmit={handleSubmit}>
+      <div className="form-register">
         <div className="form-input">
-          <label>Full Name:</label>
+          <label htmlFor="fullName">Full Name:</label>
           <input
             type="text"
+            id="fullName"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
+        
           />
         </div>
         <div className="form-input">
-          <label>Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div className="form-input">
-          <label>Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>  
-
+        </div>
         <div className="form-input">
-          <label>Address:</label>
+          <label htmlFor="address">Address:</label>
           <input
             type="text"
+            id="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           />
-        </div> 
-        
-        
-        <button type="submit" className="submit-button">
+        </div>
+        <button type="submit" className="register-button">
           Register
         </button>
-      </form>
-    </div>
-  );
+      </div>
+    </form>
+  </div>
+  </div>
+);
 }
 
 export default Register;
