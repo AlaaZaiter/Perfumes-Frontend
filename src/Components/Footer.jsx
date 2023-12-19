@@ -24,30 +24,27 @@ const Footer = () => {
     },
   ];
   return (
-    <div>
+    <div className="footer-back">
       <div className="FooterContainer">
-        <div className="">
           <div className="footer_content">
             <p className="Footer_title">Contact Us</p>
             <p>Telephone : 70 123 4567</p>
             <p>Email :Luxperfume@gmail.com</p>
           </div>
-        </div>
-
         <div className="InformationDiv">
           <p className="text-white Footer_title">Information</p>
           <div className="accordion">
             {accordionData.map((item, index) => (
-              <div className="accordion-item" key={index}>
+              <div className="accordion-item " key={index}>
                 <div
-                  className="text-white flex items-center"
+                  className="text-white flex items-center justifiy-center"
                   onClick={() => toggleAccordion(index)}
                 >
                   <img src="images/Next_page.png" alt="Next" />
                   <p>{item.title}</p>
                 </div>
                 {activeIndex === index && (
-                  <div className="text-white">
+                  <div className="text-white  ">
                     <p>{item.content}</p>
                   </div>
                 )}
@@ -71,8 +68,8 @@ const Footer = () => {
             <Link to="www.whatsapp.com">Whatsapp</Link>
           </div>
         </div>
-        <p className="text-white">Copyright &copy; </p>
       </div>
+        <p className="text-white copy-footer">Copy right &copy; Luxperfume </p>
     </div>
   );
 };

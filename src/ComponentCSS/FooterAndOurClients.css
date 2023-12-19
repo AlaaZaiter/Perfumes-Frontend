@@ -3,6 +3,10 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 20px;
 
 }
 .FooterAndOurClientsContainer h1{
@@ -33,4 +37,8 @@
     border: none;
     margin: 10px;
     border-radius: 50%;
+}
+
+ @media (max-width:768px) {
+        
 }

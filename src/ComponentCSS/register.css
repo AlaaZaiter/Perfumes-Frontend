@@ -1,0 +1,65 @@
+.card-register{
+    background-image:url(../ComponentCSS/frame.jpg);
+    border-radius: 20px;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    background-repeat: no-repeat;
+    align-items: center;
+    justify-content: center;
+    background-position: center center;
+} 
+
+
+.register{
+    background-color: #CEB5B3 !important;
+    height: 100%;
+}
+
+.form-register{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    height: 100%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+ 
+.form-input input{
+    color: #CEB5B3;
+    border-radius: 10px;
+    backdrop-filter:blur(15px);
+    background: transparent;
+    border: 2px solid #CEB5B3;
+    width: 300px;
+    height: 30px;
+}
+
+.form-input{
+    display: grid;
+    gap: 10px;
+}
+.register-button{
+    border-radius: 30%;
+    border: 2px solid #CEB5B3;
+    width: 70px;
+    height: 35px;
+    background-color: white;
+    color: #CEB5B3; 
+    margin: 10px;
+}
+
+
+@media (max-width:768px) {
+    /* .card-register{
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    } */
+}

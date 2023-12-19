@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import '../ComponentCSS/register.css'
 function Register() {
   const [fullName, setFullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [address , setAddress] = useState("");
-  const [strengthPassword, setStrengthPassword] =useState('')
+  const [strengthPassword, setStrengthPassword] = useState('')
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const validateInput = () => {
     if (!fullName) {
-      setError("Full name is required >:(");
+      setError("Full name is required");
       return false;
     }
     if (!email) {
-      setError("Email is required >:(");
+      setError("Email is required");
       return false;
     }
     if (!password) {
-      setError("Password is required >:(");
+      setError("Password is required");
       return false;
     }
     if (password.length < 6) {
-      setError("Password must be at least 6 characters long >:(");
+      setError("Password must be at least 6 characters long");
       return false;
     }
     return true;
@@ -60,6 +60,8 @@ function Register() {
       setError(error.response.data.error);
     }
   };
+
+
   const checkStrengthPassword = (value) => {
     const strongRegex = new RegExp(
       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})'
@@ -67,69 +69,83 @@ function Register() {
     const mediumRegex = new RegExp(
       '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{6,})'
     );
-
+  
     if (strongRegex.test(value)) {
-      setStrengthPassword(`You'r password is` + '  Strong');
+      setStrengthPassword(`Your password is Strong`);
     } else if (mediumRegex.test(value)) {
-      setStrengthPassword(`You'r password is` + '  Medium');
+      setStrengthPassword(`Your password is Medium`);
     } else {
-      setStrengthPassword(`You'r password is` + '  Weak');
+      setStrengthPassword(`Your password is Weak`);
     }
   };
 
-  const handlePasswordChange = (e) => {
-    const { value } = e.target;
-    setPassword(value);
+ const handlePasswordChange = (e) => {
+  const { value } = e.target;
+  setPassword(value);
+
+  if (value.trim() === '') {
+    setStrengthPassword('');
+  } else {
     checkStrengthPassword(value);
-  };
+  }
+};
+
+
   return (
-    <div className="card">
-      <h2>Register</h2>
-      {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit}>
+    <div className="register">
+    <div className="card-register">
+    {error && <p className="error-message">{error}</p>}
+    <p> {strengthPassword}</p>
+    <form onSubmit={handleSubmit}>
+      <div className="form-register">
         <div className="form-input">
-          <label>Full Name:</label>
+          <label htmlFor="fullName">Full Name:</label>
           <input
             type="text"
+            id="fullName"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
             required
+        
           />
         </div>
         <div className="form-input">
-          <label>Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
+            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
         <div className="form-input">
-          <label>Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
+            id="password"
             value={password}
             onChange={handlePasswordChange}
             required
           />
-        </div>  
-
+        </div>
         <div className="form-input">
-          <label>Address:</label>
+          <label htmlFor="address">Address:</label>
           <input
             type="text"
+            id="address"
             value={address}
             onChange={(e) => setAddress(e.target.value)}
             required
           />
-        </div> 
-        <button type="submit" className="submit-button">
+        </div>
+        <button type="submit" className="register-button">
           Register
         </button>
-        <p> {strengthPassword}</p>
-      </form>
-    </div>
+      </div>
+    </form>
+  </div>
+  </div>
   );
 }
 

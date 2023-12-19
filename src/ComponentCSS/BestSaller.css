@@ -1,11 +1,11 @@
-.container {
+.container_best {
   display: grid;
   place-items: center;
   gap: 10px;
   grid-template-columns: repeat(3, 1fr);
 }
 
-.cart_seller {
+.cart_best_seller {
     display: grid;
     justify-items: center;
     gap: 14px;
@@ -20,24 +20,25 @@
 
 .seller_btn {
     border-radius: 0px 0px 20px 20px;
-    padding: 2px 138px;
+    padding: 2px 134px;
     color: #fff;
     /* border: 1px solid #5b6a97; */
     background: #5b6a97;
 }
 
-.fade-in {
-  opacity: 0;
-  transition: opacity 1s ease;
+.best_title{
+  font-size:30px ;
+  text-align: center;
 }
-
-.fade-out {
-  opacity: 0;
-  transition: opacity 1s ease;
-}
-
 @media (max-width: 768px) {
-  .container {
+  .container_best  {
     grid-template-columns: repeat(1, 1fr);
+  }
+.best_title{
+  font-size: 24px;
+}
+  .cart_best_seller{
+    width: 97%;
+    height: 100%;
   }
 }

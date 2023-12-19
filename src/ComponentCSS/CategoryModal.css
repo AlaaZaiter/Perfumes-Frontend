@@ -9,7 +9,9 @@
   justify-content: space-between;
   align-items: center;
 }
-
+.cart_body_category{
+  text-align: center;
+}
 .perfume_name {
   font-size: 23px;
   font-weight: bold;
@@ -21,7 +23,7 @@
 }
 
 .perfume_price {
-  color: #e44d4d;
+  color: #CEB5B3;
   font-size: 20px;
   text-align: end;
 }
@@ -34,6 +36,7 @@
 .cart_image_category img {
   width: 120px;
   border-radius: 20px 20px 0px 0px;
+  /* margin-bottom: 20px; */
 }
 
 .cart_image_category img:hover {
@@ -50,8 +53,11 @@
 }
 
 .perfume_btn {
+  font-size: 13px;
   background: #5b6a97;
   color: #fff;
+  height: 40px;
+  width: 80px;
   border-radius: 20px;
   cursor: pointer;
 }

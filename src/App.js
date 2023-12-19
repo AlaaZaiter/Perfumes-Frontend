@@ -12,6 +12,7 @@ import Checkout from "./pages/CheckoutPage";
 import User from "./user/User";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
             }
           />
          <Route path="/Seller" element={<SellerDashboard/>} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+          <Route path="*" element={<NotFound/>} />
         </Routes>
          <ToastContainer />
       </Router>
