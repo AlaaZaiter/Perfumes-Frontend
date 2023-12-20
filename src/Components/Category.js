@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { getUserID } from "../Util/UserDate";
+import "../ComponentCSS/CategoryModal.css";
+
 
 
 const Category = () => {
@@ -171,7 +173,6 @@ const Category = () => {
     }
   };
   const openModal = async (perfumeId) => {
-    setShowModal(true);
 
     try {
       const [perfumeResponse, cartResponse] = await Promise.all([
@@ -197,6 +198,8 @@ const Category = () => {
         console.log("perfume id"+perfumeId)
 
         toast.success('Perfume added to cart successfully!');
+        setShowModal(true);
+
       } else {
         // Perfume is out of stock
         setShowModal(true);
@@ -266,20 +269,9 @@ const Category = () => {
           </div>
         ))}
       </div>
-      {showModal && (
-        <div className="modal">
-          <div className="modal-content">
-            <span
-              className="close"
-              onClick={() => {
-                setShowModal(false);
-              }}
-            >
-              &times;
-            </span>
-            {selectedPerfume && selectedPerfume.length > 0 ? (
+      {selectedPerfume && selectedPerfume.length > 0 ? (
               selectedPerfume.map((perfume) => (
-                <div key={perfume._id}>
+                <div key={perfume._id} className="perfume_content">
                   {perfume.image && (
                     <img
                       src={perfume.image}
@@ -287,18 +279,17 @@ const Category = () => {
                       alt="product image"
                     />
                   )}
-                  <h3>{perfume.name}</h3>
-                  <p>Price: {perfume.price}$</p>
-                  <p>Description: {perfume.description}</p>
-                  <button onClick={handleCheckoutClick}>Checkout</button>
+                  <h1 className="perfume_name">{perfume.name}</h1>
+                  <p className="perfume_description">{perfume.description}</p>
+                  <p className="perfume_price"> {perfume.price}$</p>
+                  <div className="flex gap-5">
+                  <button className="perfume_btn" onClick={handleCheckoutClick}>  Check Out</button>
+                  </div>
                 </div>
               ))
             ) : (
               <p>No perfume details available.</p>
             )}
-          </div>
-        </div>
-      )}
       <ToastContainer/>
     </div>
   );
