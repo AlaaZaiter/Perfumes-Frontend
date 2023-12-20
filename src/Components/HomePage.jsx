@@ -1,6 +1,6 @@
 
 import Header from "./Header";
-import BestSaller from "./Bestsaller.jsx"
+import BestSaller from "./BestSaller.jsx"
 
 import "../ComponentCSS/HomePageContainer.css";
 import OurClients from "./OurClients.jsx";
