@@ -3,7 +3,9 @@ import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import "../AdminDashCSS/AdminDashboard.css";
-import"../AdminDashCSS/Viewperfumes.css"
+import"../AdminDashCSS/Viewperfumes.css";
+import { ToastContainer, toast } from 'react-toastify';
+
 const AddSeller = () => {
     const [fullName, setfullName] = useState("");
     const [email, setemail] = useState("");
@@ -16,6 +18,7 @@ const AddSeller = () => {
       // Check if the required fields are not empty
       if (!fullName || !email || !password || !address  ) {
         console.error("Please fill in all the required fields.");
+        toast.error("Please fill in all the required fields")
         return;
       }else{
 
@@ -30,12 +33,16 @@ const AddSeller = () => {
       
             if (response.status === 200) {
               console.log("Seller added successfully");
+              toast.success("Seller added successfully");
               // Optionally, you can redirect to a different page or perform other actions upon successful addition.
             } else {
               console.error("Error adding seller");
+              toast.error("Error adding seller");
             }
           } catch (error) {
             console.error("Error adding seller:", error);
+            toast.error("Error adding seller");
+
           }
 
       }
@@ -58,7 +65,7 @@ const AddSeller = () => {
       
       <button onClick={handleAddPerfume}>save</button>
       </form>
-      
+      <ToastContainer/>
     </div>
   );
 };

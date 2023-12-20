@@ -3,9 +3,9 @@
     height:auto;
     width: auto;
 }
-.AboutluxA {
-    font-style: italic; /* Choose a valid font-style value */
-    font-weight: bold; /* If you want to make it bold */
+
+.AboutluxA{
+    font-style: super bold;
     background-color: #CEB5B3;
     border-radius: 0px 0px 100px 100px;
 }
@@ -17,40 +17,34 @@
     margin-left: 50px;
     margin-top: 80px;
 }
-.AboutjustA{
-    font-size: 48px;
+.about_title{
+    font-size: 45px;
+    font-style: bold;
 }
 
 .AboutcontainerAA {
     background-color: #C9C8C9;
-    justify-content: center;
-    height: 750px;
-    width: 100%;
-    color: black;
-    
 }
-.AboutcontainerAB{
-    display: flex;
-}
+
+
 
 
 li a:hover {
     color: rgba(0, 0, 0, 0.507);
 }
 
-.AbouttextareaA {
-    background-color: #5b6a97; /* Choose a valid color code */
+
+.about_subtitle {
+    background-color: #5b6a9791;
     color: white;
     border: none;
     border-radius: 30px;
-    width: 600px;
-    height: 500px;
-    margin-top: 15px;
-    display: flex;
-    justify-content: center;
+    width:500px;
+    height: 480px;
+    display: grid;
     align-items: center;
-    font-size: 28px;
-    margin-left: 10px;
+    font-size: 25px;
+    padding: 1rem;
 }
 
 
@@ -68,32 +62,22 @@ li a:hover {
 .AboutloginA:hover{
     background-color: #3e4e73a6;
 }
-@media (min-width: 320px) and (max-width:430px){
+@media (max-width:768px){
+    .about_title{
+        font-size: 25px;
+        text-align: center;
+    }
+
     .AboutimgA9{
         display: none;
     }
-   li {
-        flex-direction: column;
-        display: none;
-        cursor: pointer;
-      }
-    
-      .Aboutburger-menu {
-        display: block;
-      }
-      .AbouttextareaA{
+      .about_subtitle{
         width:300px;
         height: 400px;
-        margin-top: 15px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 19px;
+        margin-bottom: 15px;
+        font-size: 16px;
         
       }
-      .AboutjustA{
-        font-size: 40px;
-    }
     
     .AboutcontainerAA{
         height: 520px;

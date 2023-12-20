@@ -1,5 +1,5 @@
 // import Image from ''
-import "../ComponentCSS/bestsaller.css";
+import "../ComponentCSS/BestSaller.css";
 import { useState, useEffect } from "react";
 import axios from "axios";
 const Bestseller = () => {

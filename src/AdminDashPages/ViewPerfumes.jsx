@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../AdminDashCSS/Viewperfumes.css';
 import AddPerfume from "./AddPerfume";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ViewPerfumes = (props) => {
   const data = props.Data;
@@ -27,10 +28,14 @@ const handleDeletePerfume= async(perfume_id)=>{
   try {
     const response = await axios.delete(`${process.env.REACT_APP_URL}/perfume/deletePerfumeById/${perfume_id}`)
 if(response.status=200){
+  handleFetchPerfumes();
+
   console.log ("perfume deleted successfully")
+  toast.success("perfume deleted successfully")
 }
   } catch (error) {
-console.error(error)    
+console.error(error) 
+toast.error("error deleting perfume")   
   }
 }
   const handleUpdatePerfume = async () => {
@@ -53,12 +58,14 @@ console.error(error)
 
       if (response.status === 200) {
         console.log("Perfume updated successfully");
+        toast.success("Perfume updated successfully")
         // After updating, fetch the updated list of perfumes
         handleFetchPerfumes();
         // Reset editingPerfume state
         setEditingPerfume(null);
       } else {
         console.error("Error updating perfume");
+        toast.error("Error updating perfume")
       }
     } catch (error) {
       console.error(`Error fetch updating perfume: ${editingPerfume._id}`, error);
@@ -213,6 +220,7 @@ console.error(error)
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 };

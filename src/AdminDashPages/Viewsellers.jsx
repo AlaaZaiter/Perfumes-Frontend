@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import '../AdminDashCSS/Viewperfumes.css';
 import AddSeller from "./AddSeller";
 import axios from "axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const ViewSellers = () => {
   const [activePage, setActivePage] = useState("ViewSellers");
   const [sellers, setSellers] = useState([]);
@@ -26,12 +27,15 @@ const ViewSellers = () => {
     try {
       const response = await axios.delete(`${process.env.REACT_APP_URL}/user/delete/${sellerId}`);
       if (response.status === 200) {
-        console.log("Seller deleted successfully");
+        toast.success("Seller deleted Successfully", {
+          position: toast.POSITION.TOP_RIGHT,
+        });
         // After deleting, fetch the updated list of sellers
         handleFetchSellers();
       }
     } catch (error) {
       console.error("Error deleting seller:", error);
+      toast.error("Error deleting seller");
     }
   };
 
@@ -39,6 +43,7 @@ const ViewSellers = () => {
     // Check if the required fields are not empty
     if (!editingSeller.fullName  || !editingSeller.email || !editingSeller.address) {
       console.error("Please fill in all the required fields.");
+      toast.error("Please fill in all the required fields")
       return;
     }
 
@@ -52,6 +57,7 @@ const ViewSellers = () => {
 
       if (response.status === 200) {
         console.log("Seller updated successfully");
+        toast.success("Seller updated successfully")
         // After updating, fetch the updated list of sellers
         handleFetchSellers();
         // Reset editingSeller state
@@ -61,6 +67,7 @@ const ViewSellers = () => {
       }
     } catch (error) {
       console.error("Error updating seller:", error);
+      toast.error("Error updating seller")
     }
   };
 
@@ -70,8 +77,10 @@ const ViewSellers = () => {
       if (response.status === 200) {
         const data = response.data; // Access the data property directly
         setSellers(data.data.filter(user => user.role === "seller"));
+        toast.success("Seller added successfully")
       } else {
         console.error("Error fetching sellers");
+        toast.error("Error fetching sellers")
         setSellers([]);
       }
     } catch (error) {
@@ -121,6 +130,7 @@ const ViewSellers = () => {
                       )}
                     </td>
                     
+
                     <td>
                       {editingSeller && editingSeller._id === seller._id ? (
                         <input
@@ -166,6 +176,7 @@ const ViewSellers = () => {
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 };

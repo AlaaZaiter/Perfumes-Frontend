@@ -2,6 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 
 import "../AdminDashCSS/AdminDashboard.css";
@@ -19,6 +21,7 @@ const AddPerfume = () => {
     // Check if the required fields are not empty
     if (!name || !price || !category || !discount || !image || !description || !stock) {
       console.error("Please fill in all the required fields.");
+      toast.error("Please fill in all the required fields")
       return;
     }
  
@@ -34,13 +37,17 @@ const AddPerfume = () => {
     try {
       const response = await axios.post(`${process.env.REACT_APP_URL}/perfume/addPerfume`, PerfumeData);
 
+      
       if (response.status === 200) {
         console.log("Perfume added successfully");
+        toast.success("Perfume added successfully")
       } else {
-        console.error("Error adding the perfumr.");
+        console.error("Error adding the perfume.");
+        toast.error("Error adding the perfume")
       }
     } catch (error) {
       console.error("Error during perfume addition:", error);
+      toast.error("Error during perfume addition")
     }
   };
 
@@ -85,7 +92,7 @@ const AddPerfume = () => {
       <button type="button"
        onClick={handleAddPerfume}>save</button>
       </form>
-      
+      <ToastContainer/>
     </div>
   );
 };

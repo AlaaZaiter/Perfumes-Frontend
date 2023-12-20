@@ -29,7 +29,7 @@ function Checkout() {
     try {
       const response = await axios.get(`${process.env.REACT_APP_URL}/order/getOrdersByUserId/${userId}`);
       console.log('Response:', response.data);
-      setOrders(response.data.data.filter(order => order.status === "Pending"));
+      setOrders(response.data.filter(order => order.status === "Pending"));
     } catch (error) {
       console.error('Error fetching orders:', error);
     }
@@ -47,32 +47,10 @@ function Checkout() {
   };
 
   const handlePayment = async () => {
-    
-    try {
-      for (const order of orders) {
-        await SetstatusPaid(order._id);
-      }
-  
-      // Refetch orders to get the updated status
-      FetchOrderData();
-      // Send the paymentDetails to your server endpoint
-      const response = await axios.post(`${process.env.REACT_APP_URL}/payments/create-payment-intent`, {
-        amount: totalAmount,           // Pass the total amount to your server
-        paymentMethod: "creditCard",   // Pass the Payment Method ID to your server
-        accountNumber: accountNumber,  // Use the entered account number
-        userId: userId,                // Pass the user ID to your server
-      });
-
-      // Log the response from the server
-      console.log('Server response:', response.data);
-
-      // After handling payment details, update order status
-      
-    } catch (error) {
-      console.error('Payment error:', error);
-      // Handle error
-    }
-  };
+    for (const order of orders) {
+      await SetstatusPaid(order._id);
+    } 
+  }
 
   const totalAmount = orders.reduce((accumulator, order) => accumulator + order.amount, 0);
 
@@ -104,9 +82,7 @@ function Checkout() {
             {/* 'User' field might be automatically filled based on the logged-in user */}
             {/* 'paymentMethod' field is filled in the handlePayment function */}
             {/* Render the PaymentForm component for credit card details */}
-            <Elements stripe={stripePromise}>
-              <PaymentForm handlePayment={handlePayment} />
-            </Elements>
+            <button onClick={handlePayment}> Pay Now</button>
           </form>
         </div>
         <div></div>

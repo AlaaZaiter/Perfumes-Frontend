@@ -30,17 +30,18 @@ const handleDeletePerfume= async(perfume_id)=>{
     const response = await axios.delete(`${process.env.REACT_APP_URL}/perfume/deletePerfumeById/${perfume_id}`)
 if(response.status=200){
   console.log ("perfume deleted successfully");
-  toast.success('perfume deleted successfully')
+  toast.success("perfume deleted successfully");
 }
   } catch (error) {
 console.error(error)
-toast.error('perfume was not deleted successfully')    
+toast.error("perfume was not deleted successfully");    
   }
 }
   const handleUpdatePerfume = async () => {
     // Check if the required fields are not empty
     if (!editingPerfume.name || !editingPerfume.price || !editingPerfume.category || !editingPerfume.discount || !editingPerfume.description || !editingPerfume.stock) {
       console.error("Please fill in all the required fields.");
+      toast.error("Please fill in all the required fields";)
       return;
     }
 
@@ -57,12 +58,14 @@ toast.error('perfume was not deleted successfully')
 
       if (response.status === 200) {
         console.log("Perfume updated successfully");
+        toast.success("Perfume updated successfully")
         // After updating, fetch the updated list of perfumes
         handleFetchPerfumes();
         // Reset editingPerfume state
         setEditingPerfume(null);
       } else {
         console.error("Error updating perfume");
+        toast.error("Error updating perfume")
       }
     } catch (error) {
       console.error("Error updating perfume:", error);

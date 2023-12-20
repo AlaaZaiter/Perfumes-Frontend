@@ -17,7 +17,7 @@ const AddPerfume = () => {
   const handleAddPerfume = async () => {
     // Check if the required fields are not empty
     if (!name || !price || !category || !discount || !image || !description || !stock) {
-      toast.error('Please fill in all the required fields PLEASE.');
+      toast.error("Please fill in all the required fields PLEASE.");
       return;
     }
 
@@ -34,15 +34,15 @@ const AddPerfume = () => {
       const response = await axios.post(`${process.env.REACT_APP_URL}/perfume/addPerfume`, PerfumeData);
 
       if (response.status === 200) {
-        toast.success('Perfume added successfully');
+        toast.success("Perfume added successfully");
         console.log('Perfume added successfully');
       } else {
         console.error('Error adding the perfume.');
-        toast.error('Error adding the perfume.');
+        toast.error("Error adding the perfume.");
       }
     } catch (error) {
       console.error('Error during perfume addition:', error);
-      toast.error('Error during perfume addition');
+      toast.error("Error during perfume addition");
     }
   };
 

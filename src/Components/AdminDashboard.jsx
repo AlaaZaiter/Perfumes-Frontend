@@ -22,9 +22,6 @@ function TrainerDashboard() {
 
   return (
     <div >
-         <div>
-            <img src="images/NavBar.png" alt="NavBar" className='NavBar'/>
-        </div>
         <div className='SeparteSubContainerAndContent'>
       <div className='SideBarSubContainer'>
        
