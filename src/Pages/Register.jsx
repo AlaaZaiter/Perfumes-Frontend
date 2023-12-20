@@ -53,7 +53,7 @@ function Register() {
         user
       );
       console.log(response.data);
-      sessionStorage.setItem("authToken", response.data.data.token);
+      sessionStorage.setItem("authToken", response.data.data);
 
       navigate("/");
     } catch (error) {
