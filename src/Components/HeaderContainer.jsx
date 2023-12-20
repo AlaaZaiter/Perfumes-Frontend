@@ -14,7 +14,7 @@ const Headercontainer = () => {
   };
 
   useEffect(() => {
-    setLoggedIn(!!localStorage.getItem("authToken"));
+    setLoggedIn(!!sessionStorage.getItem("authToken"));
   }, []);
   const handleLogin = () => {
     setUserID(getUserID());
