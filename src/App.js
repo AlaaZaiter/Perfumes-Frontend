@@ -6,7 +6,7 @@ import SellerDashboard from './Components/SellerDashboard';
 import AdminDashboard from './Components/AdminDashboard';
 import About from "./Components/About";
 
-import ShopPage from "./Pages/ShopPage.jsx"
+import ShopPage from "./pages/ShopPage";
 import Checkout from "./Components/CheckoutPage";
 
 import ProtectRoute from "./Components/ProtectRoute";

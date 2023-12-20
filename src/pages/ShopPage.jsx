@@ -1,13 +1,13 @@
 import React from 'react'
 
-import Header from '../Components/HeaderContainer'
+import HeaderContainer from '../Components/HeaderContainer'
 import Footer from '../Components/Footer'
 import Category from '../Components/Category'
 
 const ShopPage = () => {
   return (
     <div>
-        <Header/>
+        <HeaderContainer/>
         <Category/>
         <Footer/>
     </div>
