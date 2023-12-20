@@ -10,7 +10,8 @@ import ShopPage from "./pages/ShopPage";
 import Checkout from "./Components/CheckoutPage";
 
 import ProtectRoute from "./Components/ProtectRoute";
-import Login  from './Pages/Login'
+// Correct import statement
+import Login from './Pages/Login';
 import Register from './Pages/Register';
 function App() {
   return (
