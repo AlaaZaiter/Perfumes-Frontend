@@ -5,7 +5,7 @@ import Contact from './Components/Contact';
 import SellerDashboard from './Components/SellerDashboard';
 import AdminDashboard from './Components/AdminDashboard';
 import About from "./Components/About";
-
+import NotFound from "./Pages/NotFound"
 import ShopPage from "./Pages/ShopPage";
 import Checkout from "./Components/CheckoutPage";
 
@@ -39,7 +39,7 @@ function App() {
          <Route path="/Seller" element={<ProtectRoute sellerOnly={true}>
               <SellerDashboard />
             </ProtectRoute>} />
-          {/* <Route path="*" element={<NotFound />} /> */}
+           <Route path="*" element={<NotFound />} /> 
         </Routes>
       </Router>
      </div>
