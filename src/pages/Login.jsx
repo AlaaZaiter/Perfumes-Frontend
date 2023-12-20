@@ -49,7 +49,7 @@ function Login() {
 
 
   return (
-    <div className="flex ">
+    <div className="flex_login ">
        <div className="column1">
        <h1 className="sig_title"> SIGN IN </h1>
       {error && <p className="error-message">{error}</p>}
