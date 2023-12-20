@@ -1,88 +1,88 @@
 .CheckoutContainer {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  }
-  
-  .CheckoutForm {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: center;
-  }
-  
-  .CheckoutForm input {
-    margin: 5px;
-    border-radius: 10px;
-    height: 40px;
-  }
-  
-  .CheckoutForm button {
-    background-color: #5b6a97;
-    border-radius: 10px;
-    border: none;
-    height: 40px;
-    width: 100px;
-    color: white;
-    margin-left: 20px;
-    margin-top: 50px;
-  }
-  
-  .PaymentRadiobuttons {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-  .PaymentContainer{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 50%;
-  }
-  
-  .CreditCard {
-    width: 30px;
-    height: 30px;
-  }
-  
- 
-  
-  .radioPaymentButton {
-    margin: 0 20px; 
-    display: flex;
-    flex-direction: row;
-
-  }
-  
-  .OrderContainer{
-    height: 80vh; /* 80% of the viewport height */
-    overflow-y: auto; /* Enable vertical scrollbar if content exceeds container height */
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-sizing: border-box;
-    width: 30%;display: flex;
-    flex-direction: column;
-    justify-content: end;
-  }
-  .OrderDetailContainer{
-    height: 80vh; /* 80% of the viewport height */
-    overflow-y: auto; /* Enable vertical scrollbar if content exceeds container height */
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-sizing: border-box;
-    width: 30%;display: flex;
-    flex-direction: column;
-    justify-content: end;
-  }
-  
-.orderFix{
-  margin-top: 10px;
-  width: 40px;
-  height: 50px;
+  height: 100dvh;
+  gap: 6rem;
+  justify-content: center;
 }
-.orderPar{
-  font-size: small;
-  font-weight: 100;
+
+/* .CheckoutForm input {
+  margin: 5px;
+  border-radius: 10px;
+  height: 40px;
+} */
+
+.CheckoutForm button {
+  background-color: #5b6a97;
+  border-radius: 10px;
+  border: none;
+  height: 40px;
+  width: 100px;
+  color: white;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+.PaymentRadiobuttons {
+  display: flex;
+  gap: 10rem;
+  /* justify-content: space-between; */
+}
+.PaymentContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input_payment {
+  color: #000;
+  position:relative;
+  margin-bottom:25px;
+}
+.input_payment label{
+	position:absolute;
+	top:-8px;
+	left:0px;
+	font-size:16px;
+	transition: all 0.5s ease-in-out;
+}
+.input_payment input{ 
+  border:0;
+  border-bottom:1px solid #555;  
+  background:transparent;
+  width:100%;
+  padding:8px 0 5px 0;
+  font-size:16px;
+}
+.input_payment  input:focus{ 
+ border:none;	
+ outline:none;
+ border-bottom:1px solid #5B6A97;	
+}
+
+
+.radioPaymentButton {
+  gap: 10px; 
+  display: flex;
+  align-items: center;
+}
+
+.OrderDetailContainer {
+  height: 80vh;
+  /* overflow-y: auto; */
+  padding: 10px;
+  width: 100%;
+  display: block;
+}
+
+.orderFix {
+  margin-top: 10px;
+  width: 100%;
+  /* height: 50px; */
+}
+.order_img img {
+  width: 200px;
+}
+
+.card_icon {
+  width: 50px;
 }

@@ -1,6 +1,5 @@
 
 import Header from "./Header";
-import Category from "./Category";
 import BestSaller from "./Bestsaller.jsx"
 
 import "../ComponentCSS/HomePageContainer.css";
@@ -16,7 +15,6 @@ function HomePage() {
       <div>
         <Header/>
         <CategoryOf/>
-        <Category/>
         <BestSaller/>
         <OurClients/>
         <JoinUs/>
