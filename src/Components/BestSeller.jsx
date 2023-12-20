@@ -1,4 +1,4 @@
-import "../ComponentCSS/BestSaller.css";
+import "../ComponentCSS/BestSeller.css";
 import { Link } from "react-router-dom";
 const Bestseller = () => {
 
